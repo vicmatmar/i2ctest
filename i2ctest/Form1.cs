@@ -11,6 +11,11 @@ using System.Diagnostics;
 
 using FTD2XX_NET;
 
+/// <summary>
+///  http://www.ftdichip.com/Support/Documents/AppNotes/AN_108_Command_Processor_for_MPSSE_and_MCU_Host_Bus_Emulation_Modes.pdf
+///  http://www.ftdichip.com/Support/Documents/AppNotes/AN_113_FTDI_Hi_Speed_USB_To_I2C_Example.pdf
+/// </summary>
+
 namespace i2ctest
 {
     public partial class Form1 : Form
@@ -20,6 +25,11 @@ namespace i2ctest
         const byte MSB_FALLING_EDGE_CLOCK_BIT_OUT = 0x13;
         const byte MSB_RISING_EDGE_CLOCK_BIT_IN = 0x22;
 
+        const byte SET_DATA_BITS_LOW_BYTES = 0x80;
+        const byte SET_TCK_SK_CLOCK_DIVISOR = 0x86;
+
+        FTI2C _fti2c = new FTI2C();
+
         public Form1()
         {
             InitializeComponent();
@@ -28,115 +38,10 @@ namespace i2ctest
         private void Form1_Load(object sender, EventArgs e)
         {
             int index = GetFirstDevIndex();
-            if(index >= 0)
+
+            if (index >= 0)
             {
-                FTDI ftdi = new FTDI();
-                FTDI.FT_STATUS status = ftdi.OpenByIndex((uint)index);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem opening FTDI device");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                status = ftdi.ResetDevice();
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem reseting FTDI device");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                // Purge USB receive buffer first by reading out all old data from FT2232H receive buffer
-                status = ftdi.Purge(FTDI.FT_PURGE.FT_PURGE_RX | FTDI.FT_PURGE.FT_PURGE_TX);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem purging FTDI device");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-                
-                //Set USB request transfer size
-                status = ftdi.InTransferSize(65536);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem setting USB transgere size");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                //Disable event and error characters
-                status = ftdi.SetCharacters(0, false, 0, false);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem disabling event and error characters");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                //Sets the read and write timeouts in milliseconds for the FT2232H
-                status = ftdi.SetTimeouts(5000, 5000);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem setting timeouts");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                //Set the latency timer
-                status = ftdi.SetLatency(16);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem setting latency timer");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                //Reset controller
-                status = ftdi.SetBitMode(0x0, FTDI.FT_BIT_MODES.FT_BIT_MODE_RESET);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem resetting controller");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-                // enable MPSEE mode
-                status = ftdi.SetBitMode(0x0, FTDI.FT_BIT_MODES.FT_BIT_MODE_MPSSE);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem enabling MPSEE mode");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                // Disables the clk divide by 5 to allow for a 60MHz master clock.
-                byte[] outputBuffer = new byte[3];
-                outputBuffer[0] = 0x8A;
-                // Disable adaptive clocking
-                outputBuffer[1] = 0x97;
-                // Enables 3 phase data clocking. Used by I2C interfaces to allow data on both clock edges.
-                outputBuffer[2] = 0x8C;
-                // sent of commands
-                uint outputSent = 0;
-                status = ftdi.Write(outputBuffer, outputBuffer.Length, ref outputSent);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem setting i2c");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                /*
-                    ADBUS0 TCK/SK ---> SCL
-                    ADBUS1 TDI/DO -+-> SDA
-                    ADBUS2 TDO/DI -+
-                    ADBUS3 TMS/CS
-                    ADBUSS GPIOL0
-                    ADBUS5 GPIOL1
-                    ADBUS6 GPIOl2
-                    ADBUS7 GPIOL3
-                */
-
-                outputBuffer = new byte[6];
-                // Set values and directions of lower 8 pins (ADBUS7-0)
-                outputBuffer[0] = 0x80;
-                // Set SK,DO high
-                outputBuffer[1] = 0x03;
-                // Set SK,DO as output, other as input
-                outputBuffer[2] = 0x03;
-
-                // Set clock divisor
-                outputBuffer[3] = 0x86;
-                // 100 kHz clock
-                UInt16 dwClockDivisor = 0x012B;
-                // low byte
-                outputBuffer[4] = (byte)(dwClockDivisor & 0xFF);
-                // high byte
-                outputBuffer[5] = (byte)((dwClockDivisor >> 8) & 0xFF);
-
-                // sent of commands
-                status = ftdi.Write(outputBuffer, outputBuffer.Length, ref outputSent);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem setting pins");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-                // Turn of Loopback
-                outputBuffer = new byte[1];
-                outputBuffer[0] = 0x85;
-                status = ftdi.Write(outputBuffer, outputBuffer.Length, ref outputSent);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem Turn of Loopback");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
+                _fti2c.Init(index);
 
                 byte[] i2cstart = i2c_start();
                 List<byte> buffer = new List<byte>();
@@ -152,7 +57,7 @@ namespace i2ctest
                 buffer.Add(data);
 
                 // SDA tristate, SCL low
-                buffer.Add(0x80);
+                buffer.Add(SET_DATA_BITS_LOW_BYTES);
                 buffer.Add(0x00);
                 buffer.Add(0x01);
 
@@ -161,18 +66,26 @@ namespace i2ctest
                 buffer.Add(0x00);
                 buffer.Add(0x87);
 
-                int n = 0;
-                while (true)
+                _fti2c.RawWrite(buffer.ToArray());
+
+
+                byte[] inputBuffer = _fti2c.RawRead(1);
+                // Check ACK
+                if (((inputBuffer[0] & 0x01) != 0x00))
                 {
-                    status = ftdi.Write(buffer.ToArray(), buffer.Count, ref outputSent);
-                    Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem writing i2c data");
-                    if (status != FTDI.FT_STATUS.FT_OK)
-                        return;
-                    if (n++ > 2)
-                        n = 0;
+                    //return;
                 }
 
-                byte[] i2cstopt = i2c_stop();
+                // SDA high, SCL low
+                buffer = new List<byte>();
+                buffer.Add(SET_DATA_BITS_LOW_BYTES);
+                buffer.Add(0x03);
+                buffer.Add(0x03);
+                uint outputSent = 0;
+                FTDI.FT_STATUS status = _fti2c.Controller.Write(buffer.ToArray(), buffer.Count, ref outputSent);
+                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem writing i2c data");
+                if (status != FTDI.FT_STATUS.FT_OK)
+                    return;
 
 
 
@@ -184,26 +97,27 @@ namespace i2ctest
             List<byte> start = new List<byte>();
             int i;
 
+            // Repeat commands to ensure the minimum period of the start hold time ie 600ns is achieved
             for (i = 0; i < 4; ++i)
             {
                 // SDA high, SCL high
-                start.Add(0x80);
-                start.Add(0x03);
-                start.Add(0x03);
+                start.Add(SET_DATA_BITS_LOW_BYTES); //Command to set directions of lower 8 pins and force value on bits set as output
+                start.Add(0x03); //Set SDA, SCL high, WP disabled by SK, DO at bit 1, GPIOL0 at bit 0
+                start.Add(0x03); //Set SK,DO,GPIOL0 pins as output with bit 1, other pins as input with bit 0
             }
 
             for (i = 0; i < 4; ++i)
             {
                 // SDA low, SCL high
-                start.Add(0x80);
-                start.Add(0x01);
-                start.Add(0x03);
+                start.Add(SET_DATA_BITS_LOW_BYTES); //Command to set directions of lower 8 pins and force value on bits set as output
+                start.Add(0x01); //Set SDA low, SCL high, WP disabled by SK at bit 1, DO, GPIOL0 at bit 0
+                start.Add(0x03); //Set SK,DO,GPIOL0 pins as output with bit 1, other pins as input with bit 0
             }
 
             // SDA low, SCL low
-            start.Add(0x80);
-            start.Add(0x00);
-            start.Add(0x03);
+            start.Add(SET_DATA_BITS_LOW_BYTES);//Command to set directions of lower 8 pins and force value on bits set as output
+            start.Add(0x00);//Set SDA, SCL low, WP disabled by SK, DO, GPIOL0 at bit 0
+            start.Add(0x03);//Set SK,DO,GPIOL0 pins as output with bit 1, other pins as input with bit 0
 
             return start.ToArray();
 
@@ -217,7 +131,7 @@ namespace i2ctest
             for (i = 0; i < 4; ++i)
             {
                 // SDA low, SCL high
-                start.Add(0x80);
+                start.Add(SET_DATA_BITS_LOW_BYTES);
                 start.Add(0x01);
                 start.Add(0x03);
             }
@@ -225,15 +139,15 @@ namespace i2ctest
             for (i = 0; i < 4; ++i)
             {
                 // SDA high, SCL high
-                start.Add(0x80);
+                start.Add(SET_DATA_BITS_LOW_BYTES);
                 start.Add(0x03);
                 start.Add(0x03);
             }
 
             // SDA tristate, SCL tristate
-            start.Add(0x80);
+            start.Add(SET_DATA_BITS_LOW_BYTES);
             start.Add(0x00);
-            start.Add(0x00);
+            start.Add(0x00); //other pins as input with bit 0
 
             return start.ToArray();
 
