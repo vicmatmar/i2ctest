@@ -30,6 +30,8 @@ namespace i2ctest
 
         FTI2C _fti2c = new FTI2C();
 
+        byte _slave_addr = 0x40;
+
         public Form1()
         {
             InitializeComponent();
@@ -41,87 +43,30 @@ namespace i2ctest
 
             if (index >= 0)
             {
+                byte[] i2c_start = _fti2c.FormStartBuffer();
+                byte[] i2c_idle = _fti2c.FormIdleBuffer();
+
                 _fti2c.Init(index);
-
-                byte[] i2cstart = i2c_start();
-                List<byte> buffer = new List<byte>();
-                buffer.AddRange(i2cstart);
-
-                // clock data byte on clock edge MSB first
-                buffer.Add(MSB_FALLING_EDGE_CLOCK_BYTE_OUT);
-                // data length of 0x0000 means 1 byte
-                buffer.Add(0x00);
-                buffer.Add(0x00);
-
-                byte data = 0xA5;
-                buffer.Add(data);
-
-                // SDA tristate, SCL low
-                buffer.Add(SET_DATA_BITS_LOW_BYTES);
-                buffer.Add(0x00);
-                buffer.Add(0x01);
-
-                buffer.Add(MSB_RISING_EDGE_CLOCK_BIT_IN);
-                // length of 0x00 means scan 1 bit
-                buffer.Add(0x00);
-                buffer.Add(0x87);
-
-                _fti2c.RawWrite(buffer.ToArray());
-
-
-                byte[] inputBuffer = _fti2c.RawRead(1);
-                // Check ACK
-                if (((inputBuffer[0] & 0x01) != 0x00))
+                try
                 {
-                    //return;
+                    _fti2c.RegisterPointerSet(_slave_addr, true, 0x00);
+                    _fti2c.WriteRegister(_slave_addr, 0x05, 0x1234);
                 }
-
-                // SDA high, SCL low
-                buffer = new List<byte>();
-                buffer.Add(SET_DATA_BITS_LOW_BYTES);
-                buffer.Add(0x03);
-                buffer.Add(0x03);
-                uint outputSent = 0;
-                FTDI.FT_STATUS status = _fti2c.Controller.Write(buffer.ToArray(), buffer.Count, ref outputSent);
-                Debug.Assert(status == FTDI.FT_STATUS.FT_OK, "Problem writing i2c data");
-                if (status != FTDI.FT_STATUS.FT_OK)
-                    return;
-
-
-
+                catch (FTI2CException ex)
+                {
+                    //Debug.Fail(ex.Message);
+                }
+                try
+                {
+                    _fti2c.RegisterPointerSet(_slave_addr, true, 0x00);
+                }
+                catch (FTI2CException ex)
+                {
+                    //Debug.Fail(ex.Message);
+                }
             }
         }
 
-        byte[] i2c_start()
-        {
-            List<byte> start = new List<byte>();
-            int i;
-
-            // Repeat commands to ensure the minimum period of the start hold time ie 600ns is achieved
-            for (i = 0; i < 4; ++i)
-            {
-                // SDA high, SCL high
-                start.Add(SET_DATA_BITS_LOW_BYTES); //Command to set directions of lower 8 pins and force value on bits set as output
-                start.Add(0x03); //Set SDA, SCL high, WP disabled by SK, DO at bit 1, GPIOL0 at bit 0
-                start.Add(0x03); //Set SK,DO,GPIOL0 pins as output with bit 1, other pins as input with bit 0
-            }
-
-            for (i = 0; i < 4; ++i)
-            {
-                // SDA low, SCL high
-                start.Add(SET_DATA_BITS_LOW_BYTES); //Command to set directions of lower 8 pins and force value on bits set as output
-                start.Add(0x01); //Set SDA low, SCL high, WP disabled by SK at bit 1, DO, GPIOL0 at bit 0
-                start.Add(0x03); //Set SK,DO,GPIOL0 pins as output with bit 1, other pins as input with bit 0
-            }
-
-            // SDA low, SCL low
-            start.Add(SET_DATA_BITS_LOW_BYTES);//Command to set directions of lower 8 pins and force value on bits set as output
-            start.Add(0x00);//Set SDA, SCL low, WP disabled by SK, DO, GPIOL0 at bit 0
-            start.Add(0x03);//Set SK,DO,GPIOL0 pins as output with bit 1, other pins as input with bit 0
-
-            return start.ToArray();
-
-        }
 
         byte[] i2c_stop()
         {
