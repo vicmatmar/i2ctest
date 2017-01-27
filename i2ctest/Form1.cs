@@ -47,9 +47,11 @@ namespace i2ctest
                 byte[] i2c_idle = _fti2c.FormIdleBuffer();
 
                 _fti2c.Init(index);
+                _fti2c.WriteRegister(_slave_addr, 0x05, 0x1234);
+
                 try
                 {
-                    _fti2c.RegisterPointerSet(_slave_addr, true, 0x00);
+                    //_fti2c.RegisterPointerSet(_slave_addr, true, 0x00);
                     _fti2c.WriteRegister(_slave_addr, 0x05, 0x1234);
                 }
                 catch (FTI2CException ex)

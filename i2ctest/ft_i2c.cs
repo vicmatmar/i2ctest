@@ -30,6 +30,8 @@ namespace i2ctest
         const byte SET_TCK_SK_CLOCK_DIVISOR = 0x86;
         const byte DISABLE_CLOCK_DIVISOR = 0x8A;
 
+        const int USB_TRANSFERE_SIZE = 65536;
+
         FTDI _ftdi;
         public FTDI Controller { get { return _ftdi; } }
 
@@ -50,7 +52,7 @@ namespace i2ctest
                 throw new FTI2CException("Problem purging FTDI device");
 
             //Set USB request transfer size
-            status = _ftdi.InTransferSize(65536);
+            status = _ftdi.InTransferSize(USB_TRANSFERE_SIZE);
             if (status != FTDI.FT_STATUS.FT_OK)
                 throw new FTI2CException("Problem setting USB transgere size");
 
@@ -121,36 +123,61 @@ namespace i2ctest
 
         public void WriteRegister(byte slave_addr, byte register_pointer, int value)
         {
+            _ftdi.Purge(FTDI.FT_PURGE.FT_PURGE_RX | FTDI.FT_PURGE.FT_PURGE_TX);
 
             List<byte> buffer = new List<byte>();
 
             // Frame 1 - Slave addr
             buffer.AddRange( FormStartBuffer() );// Start
             buffer.AddRange( FormSlaveAddrBuffer(slave_addr, false) ); // Slave addr + R/W
-            RawWrite(buffer.ToArray()); // Send command
 
             // Frame 2 - Resgister address
-            buffer = new List<byte>();
             buffer.AddRange( FormDataBuffer(register_pointer) );
-            RawWrite(buffer.ToArray()); // Send command
 
             // Farme 3 - Data MSB
             byte msb = (byte)(value >> 8);
-            buffer = new List<byte>();
             buffer.AddRange( FormDataBuffer(msb) );
-            RawWrite( buffer.ToArray() ); // Send command
 
             // Farme 4 - Data LSB
             byte lsb = (byte)(value & 0xFF);
-            buffer = new List<byte>();
             buffer.AddRange( FormDataBuffer(lsb) );
-            buffer.AddRange(FormStopBuffer());// Stop
+
+            buffer.AddRange( FormStopBuffer() );// Stop
+
             RawWrite(buffer.ToArray()); // Send command
 
             // Check ACKs
+            uint read_count = WaifForRxDataCount(4, 100);
+            byte[] readdata = RawRead(read_count);
+            byte ack = (byte)(readdata[read_count - 1] & 0x0F);
+            if (ack != 0)
+                throw new FTI2CException("No ACK");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="max_read_count"></param>
+        /// <returns>Rx bytes available</returns>
+        public uint WaifForRxDataCount(uint count, uint max_read_count=100)
+        {
+            FTDI.FT_STATUS status;
+            uint read_count = 0;
             uint inCount = 0;
-            FTDI.FT_STATUS status = _ftdi.GetRxBytesAvailable(ref inCount);
-            byte[] readdata = RawRead(inCount);
+            while (true)
+            {
+                status = _ftdi.GetRxBytesAvailable(ref inCount);
+                if (status != FTDI.FT_STATUS.FT_OK)
+                    throw new FTI2CException("Unable to get Rx bytes available");
+                if (inCount >= count)
+                    break;
+                if (read_count++ > max_read_count)
+                    throw new FTI2CException("Timeout reading Rx bytes available");
+                Thread.Sleep(1);
+            }
+
+            return inCount;
 
         }
 
@@ -163,44 +190,36 @@ namespace i2ctest
         public void RegisterPointerSet(byte slave_addr, bool R_W, byte register_pointer)
         {
             List<byte> buffer = new List<byte>();
-            
-            buffer.AddRange( FormStartBuffer() );// Start
+            FTDI.FT_STATUS status;
+            int read_count = 0;
+            uint inCount = 0;
+
+            // Start - Slave addr
+            buffer.AddRange( FormStartBuffer() ); // Start
             buffer.AddRange( FormSlaveAddrBuffer(slave_addr, R_W) ); // Slave addr + R/W
+
+            // Resgister address
+            buffer.AddRange( FormDataBuffer(register_pointer) );
+
+            // Stop
+            buffer.AddRange( FormStopBuffer() ); // Stop
             RawWrite(buffer.ToArray()); // Send command
 
-            // Wait for data
-            /*
-            int read_count = 0;
+
+            // Check ACKs
             while (true)
             {
-                uint inCount = 0;
-                FTDI.FT_STATUS status = _ftdi.GetRxBytesAvailable(ref inCount);
+                status = _ftdi.GetRxBytesAvailable(ref inCount);
                 if (status != FTDI.FT_STATUS.FT_OK)
                     throw new FTI2CException("Unable to get Rx bytes available");
-                if (inCount >= 1)
+                if (inCount >= 2)
                     break;
-                if (read_count++ > 500)
+                if (read_count++ > 100)
                     throw new FTI2CException("Timeout reading Rx bytes available");
                 Thread.Sleep(1);
             }
 
-            //Check ACK bit 0 on data byte read out
-            byte[] inputBuffer = RawRead(1);
-            if ((inputBuffer[0] & 0x01) != 0x00)
-            {
-                //throw new FTI2CException("Failed to get ACK from I2C Slave");
-            }
-            */
-
-            // Resgister address
-            buffer = new List<byte>();
-            buffer.AddRange( FormDataBuffer(register_pointer) );
-            buffer.AddRange( FormStopBuffer() );// Stop
-            RawWrite(buffer.ToArray()); // Send command
-
-            // Check ACKs
-            uint inCount = 0;
-            FTDI.FT_STATUS status = _ftdi.GetRxBytesAvailable(ref inCount);
+            status = _ftdi.GetRxBytesAvailable(ref inCount);
             byte[] readdata = RawRead(inCount);
             // readdata should be all 0 for all acks
 
@@ -216,18 +235,17 @@ namespace i2ctest
 
             // SDA tristate, SCL low
             buffer.Add(SET_DATA_BITS_ADBUS);
-            buffer.Add(0x00);
+            buffer.Add(0x02);
             buffer.Add(0x01);
 
             // Clock for ACK
             buffer.Add(MSB_RISING_EDGE_CLOCK_BIT_IN);// Command to clock in bits MSB first on rising edge
             buffer.Add(0x00);// length of 0x00 means scan 1 bit
-            //buffer.Add(0x87);//Send answer back immediate command
+            buffer.Add(0x87);//Send answer back immediate command. This will make the chip flush its buffer back to the PC
             // Reset pin state after ACK
             buffer.Add(SET_DATA_BITS_ADBUS);
             buffer.Add(0x02); // SDA High, SCL low
             buffer.Add(0x03);
-
 
             return buffer.ToArray();
         }
@@ -247,14 +265,15 @@ namespace i2ctest
 
             // SDA tristate, SCL low
             buffer.Add(SET_DATA_BITS_ADBUS);
-            buffer.Add(0x00);
+            buffer.Add(0x02); 
             buffer.Add(0x01);
 
             // Clock for ACK
             buffer.Add(MSB_RISING_EDGE_CLOCK_BIT_IN);// Command to clock in bits MSB first on rising edge
             buffer.Add(0x00);// length of 0x00 means scan 1 bit
-            //buffer.Add(0x87);//Send answer back immediate command
-            // Reset pin state after ACK
+            buffer.Add(0x87);//Send answer back immediate command
+
+            //// Reset pin state
             buffer.Add(SET_DATA_BITS_ADBUS);
             buffer.Add(0x02); // SDA High, SCL low
             buffer.Add(0x03);
@@ -270,14 +289,14 @@ namespace i2ctest
             List<byte> buffer = new List<byte>();
 
             // Repeat commands to ensure the minimum period of the start hold time ie 600ns is achieved
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 // SDA high, SCL high
                 buffer.Add(SET_DATA_BITS_ADBUS); //Command to set ADBUS state and direction
                 buffer.Add(0x03); //Set SDA high, SCL high
                 buffer.Add(0x03); //Set SDA, SCL as output with bit 1, other pins as input with bit 0
             }
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 buffer.Add(SET_DATA_BITS_ADBUS); //Command to set ADBUS state and direction
                 buffer.Add(0x01); //Set SDA low, SCL high
@@ -295,21 +314,21 @@ namespace i2ctest
         {
             List<byte> buffer = new List<byte>();
 
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 buffer.Add(SET_DATA_BITS_ADBUS);
                 buffer.Add(0x00);
                 buffer.Add(0x03);
             }
 
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 buffer.Add(SET_DATA_BITS_ADBUS);
                 buffer.Add(0x01);
                 buffer.Add(0x03);
             }
 
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 buffer.Add(SET_DATA_BITS_ADBUS);
                 buffer.Add(0x03);
@@ -338,9 +357,12 @@ namespace i2ctest
 
         public uint RawWrite(byte[] buffer)
         {
+            if(buffer.Length > USB_TRANSFERE_SIZE)
+                throw new FTI2CException("buffer size too large");
+
             uint outputSent = 0;
             FTDI.FT_STATUS status = _ftdi.Write(buffer, buffer.Length, ref outputSent);
-            if (status != FTDI.FT_STATUS.FT_OK)
+            if (status != FTDI.FT_STATUS.FT_OK || outputSent != buffer.Length)
                 throw new FTI2CException("Problem writing data");
             return outputSent;
         }
