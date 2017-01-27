@@ -28,21 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label_voltage = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // label_voltage
+            // 
+            this.label_voltage.AutoSize = true;
+            this.label_voltage.Location = new System.Drawing.Point(92, 84);
+            this.label_voltage.Name = "label_voltage";
+            this.label_voltage.Size = new System.Drawing.Size(35, 13);
+            this.label_voltage.TabIndex = 0;
+            this.label_voltage.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.label_voltage);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label_voltage;
     }
 }
 
