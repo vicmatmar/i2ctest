@@ -81,6 +81,14 @@ namespace i2ctest
         const byte INA219_REG_CURRENT = (0x04);
         const byte INA219_REG_CALIBRATION = (0x05);
 
+        UInt16 _ina219_calValue = 8192;
+        double _ina219_currentDivider_mA = 20;  // Current LSB = 50uA per bit (1000/50 = 20)
+        double _ina219_powerDivider_mW = 1;     // Power LSB = 1mW per bit
+
+        Task _read_task;
+        CancellationTokenSource _cancel_read_task;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -95,42 +103,158 @@ namespace i2ctest
 
                 _fti2c.Init(index);
 
-                Int16 ina219_calValue = 8192;
-                _fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CALIBRATION, ina219_calValue);
+                // VBUS_MAX = 16V
+                // VSHUNT_MAX = 0.04          (Assumes Gain 1, 40mV)
+                // RSHUNT = 0.1               (Resistor value in ohms)
 
-                Int16 config = INA219_CONFIG_BVOLTAGERANGE_16V |
-                                    INA219_CONFIG_GAIN_1_40MV |
+                // Calibration which uses the highest precision for 
+                // current measurement (0.1mA), at the expense of 
+                // only supporting 16V at 400mA max.
+
+                // 1. Determine max possible current
+                // MaxPossible_I = VSHUNT_MAX / RSHUNT
+                // MaxPossible_I = 0.4A
+
+                // 2. Determine max expected current
+                // MaxExpected_I = 0.4A
+
+                // 3. Calculate possible range of LSBs (Min = 15-bit, Max = 12-bit)
+                // MinimumLSB = MaxExpected_I/32767
+                // MinimumLSB = 0.0000122              (12uA per bit)
+                // MaximumLSB = MaxExpected_I/4096
+                // MaximumLSB = 0.0000977              (98uA per bit)
+
+                // 4. Choose an LSB between the min and max values
+                //    (Preferrably a roundish number close to MinLSB)
+                // CurrentLSB = 0.00005 (50uA per bit)
+
+                // 5. Compute the calibration register
+                // Cal = trunc (0.04096 / (Current_LSB * RSHUNT))
+                // Cal = 8192 (0x2000)
+                //_ina219_calValue = 0x2000;
+                _ina219_calValue = 0xFFFE;
+                writeCalibration(_ina219_calValue);
+                //_fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CALIBRATION, _ina219_calValue);
+
+                // 6. Calculate the power LSB
+                // PowerLSB = 20 * CurrentLSB
+                // PowerLSB = 0.001 (1mW per bit)
+
+                // 7. Compute the maximum current and shunt voltage values before overflow
+                // Max_Current = Current_LSB * 32767
+                // Max_Current = 1.63835A before overflow
+                //
+                // If Max_Current > Max_Possible_I then
+                //    Max_Current_Before_Overflow = MaxPossible_I
+                // Else
+                //    Max_Current_Before_Overflow = Max_Current
+                // End If
+                //
+                // Max_Current_Before_Overflow = MaxPossible_I
+                // Max_Current_Before_Overflow = 0.4
+                //
+                // Max_ShuntVoltage = Max_Current_Before_Overflow * RSHUNT
+                // Max_ShuntVoltage = 0.04V
+                //
+                // If Max_ShuntVoltage >= VSHUNT_MAX
+                //    Max_ShuntVoltage_Before_Overflow = VSHUNT_MAX
+                // Else
+                //    Max_ShuntVoltage_Before_Overflow = Max_ShuntVoltage
+                // End If
+                //
+                // Max_ShuntVoltage_Before_Overflow = VSHUNT_MAX
+                // Max_ShuntVoltage_Before_Overflow = 0.04V
+
+                // 8. Compute the Maximum Power
+                // MaximumPower = Max_Current_Before_Overflow * VBUS_MAX
+                // MaximumPower = 0.4 * 16V
+                // MaximumPower = 6.4W
+
+                // Set multipliers to convert raw current/power values
+                _ina219_currentDivider_mA = 160;  // Current LSB = 50uA per bit (1000/50 = 20)
+                _ina219_powerDivider_mW = 1;     // Power LSB = 1mW per bit
+
+
+                UInt16 config = INA219_CONFIG_BVOLTAGERANGE_16V |
+                                    INA219_CONFIG_GAIN_8_320MV |
                                     INA219_CONFIG_BADCRES_12BIT |
-                                    INA219_CONFIG_SADCRES_12BIT_1S_532US |
+                                    INA219_CONFIG_SADCRES_12BIT_32S_17MS |
                                     INA219_CONFIG_MODE_SANDBVOLT_CONTINUOUS;
 
                 _fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CONFIG, config);
 
-                Task read_task = new Task(()=>read_data());
-                read_task.Start();
-
+                numericUpDown_cal.Value = _ina219_calValue;
+                start_read_task();
             }
         }
 
-        void read_data()
+        void start_read_task()
         {
-            while(true)
+            _cancel_read_task = new CancellationTokenSource();
+            _read_task = new Task(() => read_data(_cancel_read_task.Token), _cancel_read_task.Token);
+            _read_task.Start();
+        }
+
+        void writeCalibration(UInt16 value)
+        {
+            _fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CALIBRATION, value);
+        }
+
+        UInt16 readCalibration()
+        {
+            _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_CALIBRATION);
+            UInt16 cal_val = (UInt16)_fti2c.ReadRegister(INA219_ADDRESS);
+
+            return cal_val;
+        }
+
+        void read_data(CancellationToken cancel)
+        {
+            while (true)
             {
-                _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_CALIBRATION);
-                Int16 cal_val = _fti2c.ReadRegister(INA219_ADDRESS);
+                if (cancel.IsCancellationRequested)
+                    return;
 
-                _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_CURRENT);
-                Int16 current_reg = _fti2c.ReadRegister(INA219_ADDRESS);
+                UInt16 cal_val = readCalibration();
+                string text = string.Format("0x{0:X}", cal_val);
+                syncLabelSetTextAndColor(label_calibration, text, Color.Black);
+                if (cal_val != _ina219_calValue)
+                {
+                    UInt16 newval = (UInt16)numericUpDown_cal.Value;
+                    writeCalibration(newval);
+                }
 
+
+                _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_SHUNTVOLTAGE);
+                Int16 volts_shunt_reg = _fti2c.ReadRegister(INA219_ADDRESS);
+                // Shift to the right 3 to drop CNVR and OVF and multiply by LSB
+                double volts_shunt = volts_shunt_reg * 0.01;
+                text = string.Format("{0:F4}", volts_shunt);
+
+                syncLabelSetTextAndColor(label_voltage_shunt, text, Color.Black);
 
                 _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_BUSVOLTAGE);
                 Int16 volts_reg = _fti2c.ReadRegister(INA219_ADDRESS);
-                // Shift to the right 3 to drop CNVR and OVF and multiply by LSB
-                volts_reg = (Int16)((volts_reg >> 3) * 4);
-                double volts = volts_reg * 0.001;
+                text = "";
+                if ((Int16)(volts_reg & 0x01) == 0x01)
+                {
+                    text = "Over Flow";
+                }
+                else
+                {
+                    // Shift to the right 3 to drop CNVR and OVF and multiply by LSB
+                    volts_reg = (Int16)(volts_reg >> 3);
+                    double volts = volts_reg * 4e-3;
+                    text = string.Format("{0:F4}", volts);
+                }
+                syncLabelSetTextAndColor(label_voltage_bus, text, Color.Black);
 
 
-                syncLabelSetTextAndColor(label_voltage, volts.ToString(), Color.Black);
+                _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_CURRENT);
+                Int16 current_reg = _fti2c.ReadRegister(INA219_ADDRESS);
+                double current = current_reg / _ina219_currentDivider_mA;
+                text = string.Format(" {0:F4}", current);
+                syncLabelSetTextAndColor(label_current, text, Color.Black);
             }
         }
 
@@ -201,5 +325,12 @@ namespace i2ctest
             return index;
         }
 
+        private void numericUpDown_cal_ValueChanged(object sender, EventArgs e)
+        {
+            lock (numericUpDown_cal)
+            {
+                _ina219_calValue = (UInt16)numericUpDown_cal.Value;
+            }
+        }
     }
 }

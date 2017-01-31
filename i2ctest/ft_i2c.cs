@@ -35,6 +35,8 @@ namespace i2ctest
         FTDI _ftdi;
         public FTDI Controller { get { return _ftdi; } }
 
+        public enum BUS { ACBUS=0x82, ADBUS=0x80 }; // {HI (7-0), LO (7-0)} bus libes
+
         public void Init(int index)
         {
             _ftdi = new FTDI();
@@ -118,13 +120,6 @@ namespace i2ctest
             buffer.Add(TURN_OFF_LOOPBACK);//Command to turn off loop back of TDI/TDO connection
             RawWrite(buffer.ToArray());// sent of commands
 
-            // Turn test LED on using data bit C0
-            buffer.Add(SET_DATA_BITS_ACBUS); //Command to set ADBUS state and direction
-            buffer.Add(0x01);
-            buffer.Add(0x01);
-            RawWrite(buffer.ToArray()); // Send Command
-
-
         }
 
         public Int16 ReadRegister(byte slave_addr)
@@ -185,7 +180,7 @@ namespace i2ctest
             return value;
         }
 
-        public void WriteRegister(byte slave_addr, byte register_pointer, Int16 value)
+        public void WriteRegister(byte slave_addr, byte register_pointer, UInt16 value)
         {
             _ftdi.Purge(FTDI.FT_PURGE.FT_PURGE_RX | FTDI.FT_PURGE.FT_PURGE_TX);
 
@@ -282,18 +277,14 @@ namespace i2ctest
             buffer.Add(data); // data
 
             // SDA tristate, SCL low
-            buffer.Add(SET_DATA_BITS_ADBUS);
-            buffer.Add(0x02);
-            buffer.Add(0x01);
+            buffer.AddRange(form_SetDataBits(BUS.ADBUS, 0x02, 0x01));
 
             // Clock for ACK
             buffer.Add(MSB_RISING_EDGE_CLOCK_BIT_IN);// Command to clock in bits MSB first on rising edge
             buffer.Add(0x00);// length of 0x00 means scan 1 bit
             buffer.Add(0x87);//Send answer back immediate command. This will make the chip flush its buffer back to the PC
-            // Reset pin state after ACK
-            buffer.Add(SET_DATA_BITS_ADBUS);
-            buffer.Add(0x02); // SDA High, SCL low
-            buffer.Add(0x03);
+            // SDA High, SCL low
+            buffer.AddRange(form_SetDataBits(BUS.ADBUS, 0x02, 0x03));
 
             return buffer.ToArray();
         }
@@ -398,6 +389,30 @@ namespace i2ctest
             buffer.Add(SET_DATA_BITS_ADBUS); // Command to set ADbus direction and data 
             buffer.Add(0x02);// Set SDA high, SCL low
             buffer.Add(0x03);// Set SDA, SCL pins as o/p
+
+            return buffer.ToArray();
+
+        }
+
+        /// <summary>
+        /// This will setup the direction of the BUS and force a value on the bits that are set as output.         /// A 1 in the Direction byte will make that bit an output, 0 an input        /// </summary>
+        /// <param name="bus"></param>
+        /// <param name="value"></param>
+        /// <param name="direction"></param>
+        byte[] form_SetDataBits(BUS bus=BUS.ADBUS, byte value=0x00, byte direction=0x00)
+        {
+            /*
+            byte opcode = 0x80; // Low byte ADBUS
+            if(bus == BUS.ACBUS) // High byte ACBUS
+            {
+                opcode = 0x82;
+            }*/
+
+            List<byte> buffer = new List<byte>();
+            byte opcode = (byte)bus;
+            buffer.Add(opcode);
+            buffer.Add(value);
+            buffer.Add(direction);
 
             return buffer.ToArray();
 
