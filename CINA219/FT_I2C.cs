@@ -7,7 +7,7 @@ using System.Threading;
 
 using FTD2XX_NET;
 
-namespace i2ctest
+namespace CINA219
 {
     /// <summary>
     ///  http://www.ftdichip.com/Support/Documents/AppNotes/AN_108_Command_Processor_for_MPSSE_and_MCU_Host_Bus_Emulation_Modes.pdf
@@ -36,7 +36,7 @@ namespace i2ctest
         FTDI _ftdi;
         public FTDI Controller { get { return _ftdi; } }
 
-        public enum BUS { ACBUS=0x82, ADBUS=0x80 }; // {HI (7-0), LO (7-0)} bus libes
+        public enum BUS { ACBUS = 0x82, ADBUS = 0x80 }; // {HI (7-0), LO (7-0)} bus libes
 
         public void Init(int index)
         {
@@ -176,7 +176,7 @@ namespace i2ctest
             if (ack != 0)
                 throw new FTI2CException("No ACK");
 
-            Int16 value = (Int16)( (readdata[1] << 8) | (readdata[2]) );
+            Int16 value = (Int16)((readdata[1] << 8) | (readdata[2]));
 
             return value;
         }
@@ -252,11 +252,11 @@ namespace i2ctest
             List<byte> buffer = new List<byte>();
 
             // Start - Slave addr
-            buffer.AddRange( FormStartBuffer() ); // Start
-            buffer.AddRange( FormSlaveAddrBuffer(slave_addr, R_W) ); // Slave addr + R/W
+            buffer.AddRange(FormStartBuffer()); // Start
+            buffer.AddRange(FormSlaveAddrBuffer(slave_addr, R_W)); // Slave addr + R/W
 
             // Resgister address
-            buffer.AddRange( FormDataBuffer(register_pointer) );
+            buffer.AddRange(FormDataBuffer(register_pointer));
 
             // Stop
             buffer.AddRange(FormStopBuffer()); // Stop
@@ -400,7 +400,7 @@ namespace i2ctest
         /// <param name="bus"></param>
         /// <param name="value"></param>
         /// <param name="direction"></param>
-        byte[] form_SetDataBits(BUS bus=BUS.ADBUS, byte value=0x00, byte direction=0x00)
+        byte[] form_SetDataBits(BUS bus = BUS.ADBUS, byte value = 0x00, byte direction = 0x00)
         {
             /*
             byte opcode = 0x80; // Low byte ADBUS

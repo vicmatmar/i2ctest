@@ -21,13 +21,6 @@ namespace i2ctest
 {
     public partial class Form1 : Form
     {
-        const byte MSB_FALLING_EDGE_CLOCK_BYTE_IN = 0x20;
-        const byte MSB_FALLING_EDGE_CLOCK_BYTE_OUT = 0x11;
-        const byte MSB_FALLING_EDGE_CLOCK_BIT_OUT = 0x13;
-        const byte MSB_RISING_EDGE_CLOCK_BIT_IN = 0x22;
-
-        const byte SET_DATA_BITS_LOW_BYTES = 0x80;
-        const byte SET_TCK_SK_CLOCK_DIVISOR = 0x86;
 
         FTI2C _fti2c = new FTI2C();
 
@@ -83,7 +76,6 @@ namespace i2ctest
 
         UInt16 _ina219_calValue = 8192;
         double _ina219_currentDivider_mA = 20;  // Current LSB = 50uA per bit (1000/50 = 20)
-        double _ina219_powerDivider_mW = 1;     // Power LSB = 1mW per bit
 
         Task _read_task;
         CancellationTokenSource _cancel_read_task;
@@ -132,7 +124,7 @@ namespace i2ctest
                 // Cal = trunc (0.04096 / (Current_LSB * RSHUNT))
                 // Cal = 8192 (0x2000)
                 //_ina219_calValue = 0x2000;
-                _ina219_calValue = 0xFFFE;
+                _ina219_calValue = 0x5000;
                 writeCalibration(_ina219_calValue);
                 //_fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CALIBRATION, _ina219_calValue);
 
@@ -171,14 +163,13 @@ namespace i2ctest
                 // MaximumPower = 6.4W
 
                 // Set multipliers to convert raw current/power values
-                _ina219_currentDivider_mA = 160;  // Current LSB = 50uA per bit (1000/50 = 20)
-                _ina219_powerDivider_mW = 1;     // Power LSB = 1mW per bit
+                _ina219_currentDivider_mA = 50;  // Current LSB = 50uA per bit (1000/50 = 20)
 
 
                 UInt16 config = INA219_CONFIG_BVOLTAGERANGE_16V |
                                     INA219_CONFIG_GAIN_8_320MV |
                                     INA219_CONFIG_BADCRES_12BIT |
-                                    INA219_CONFIG_SADCRES_12BIT_32S_17MS |
+                                    INA219_CONFIG_SADCRES_12BIT_4S_2130US |
                                     INA219_CONFIG_MODE_SANDBVOLT_CONTINUOUS;
 
                 _fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CONFIG, config);
@@ -332,5 +323,6 @@ namespace i2ctest
                 _ina219_calValue = (UInt16)numericUpDown_cal.Value;
             }
         }
+
     }
 }
