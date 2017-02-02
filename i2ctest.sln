@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i2ctest", "i2ctest\i2ctest.csproj", "{A24E7624-05C8-4286-9374-A698A0351306}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CINA219", "CINA219\CINA219.csproj", "{AD7DDC93-E405-481A-8AD7-73502728390F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cina219test", "Cina219test\Cina219test.csproj", "{AE640B30-D127-4380-8C7F-5071F7BD6755}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A24E7624-05C8-4286-9374-A698A0351306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A24E7624-05C8-4286-9374-A698A0351306}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A24E7624-05C8-4286-9374-A698A0351306}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A24E7624-05C8-4286-9374-A698A0351306}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD7DDC93-E405-481A-8AD7-73502728390F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD7DDC93-E405-481A-8AD7-73502728390F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD7DDC93-E405-481A-8AD7-73502728390F}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -74,7 +74,11 @@ namespace CINA219
         FTI2C _fti2c = new FTI2C();
 
         UInt16 _ina219_calValue = 0x1000;
-        double _ina219_currentDivider_mA = 20;
+        float _ina219_currentDivider_mA = 20;
+        public float CurrentDivider { get { return _ina219_currentDivider_mA; } set { _ina219_currentDivider_mA = value; } }
+
+        float _ina219_powerDivider_mW = 1;
+        public float PowerDivider { get { return _ina219_powerDivider_mW; } set { _ina219_powerDivider_mW = value; } }
 
         public Cina219(byte INA216_address = 0x40, int ft232h_index = 0)
         {
@@ -118,7 +122,7 @@ namespace CINA219
             // Cal = 8192 (0x2000)
             //_ina219_calValue = 0x2000;
             //_fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CALIBRATION, _ina219_calValue);
-            _ina219_calValue = 0x5000;
+            _ina219_calValue = 0x2000;
             WriteCalibration(_ina219_calValue);
 
             // 6. Calculate the power LSB
@@ -156,16 +160,17 @@ namespace CINA219
             // MaximumPower = 6.4W
 
             // Set multipliers to convert raw current/power values
-            _ina219_currentDivider_mA = 50;  // Current LSB = 50uA per bit (1000/50 = 20)
+            _ina219_currentDivider_mA = 20;  // Current LSB = 50uA per bit (1000/50 = 20)
+            _ina219_powerDivider_mW = 1;     // Power LSB = 1mW per bit
 
 
             UInt16 config = INA219_CONFIG_BVOLTAGERANGE_16V |
-                                INA219_CONFIG_GAIN_8_320MV |
+                                INA219_CONFIG_GAIN_1_40MV |
                                 INA219_CONFIG_BADCRES_12BIT |
-                                INA219_CONFIG_SADCRES_12BIT_4S_2130US |
+                                INA219_CONFIG_SADCRES_12BIT_2S_1060US |
                                 INA219_CONFIG_MODE_SANDBVOLT_CONTINUOUS;
 
-            _fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CONFIG, config);
+            WriteConfiguration(config);
         }
 
         /// <summary>
@@ -204,6 +209,19 @@ namespace CINA219
             return index;
         }
 
+        public void WriteConfiguration(UInt16 value)
+        {
+            _fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CONFIG, value);
+        }
+
+        public UInt16 ReadConfiguration()
+        {
+            _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_CONFIG);
+            UInt16 val = (UInt16)_fti2c.ReadRegister(INA219_ADDRESS);
+
+            return val;
+        }
+
         public void WriteCalibration(UInt16 value)
         {
             _fti2c.WriteRegister(INA219_ADDRESS, INA219_REG_CALIBRATION, value);
@@ -212,46 +230,53 @@ namespace CINA219
         public UInt16 ReadCalibration()
         {
             _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_CALIBRATION);
-            UInt16 cal_val = (UInt16)_fti2c.ReadRegister(INA219_ADDRESS);
+            UInt16 val = (UInt16)_fti2c.ReadRegister(INA219_ADDRESS);
 
-            return cal_val;
+            return val;
         }
 
-        public double GetShuntVoltage()
+        public float GetShuntVoltage()
         {
             _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_SHUNTVOLTAGE);
             Int16 volts_shunt_reg = _fti2c.ReadRegister(INA219_ADDRESS);
             // Shift to the right 3 to drop CNVR and OVF and multiply by LSB
-            double volts_shunt = volts_shunt_reg * 0.01;
+            float volts_shunt = volts_shunt_reg * 0.01f;
 
             return volts_shunt;
 
         }
 
-        public double GetVoltage(bool check_overflow = false)
+        public float GetVoltage(ref bool ovf)
         {
             _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_BUSVOLTAGE);
             Int16 volts_reg = _fti2c.ReadRegister(INA219_ADDRESS);
 
-            if (check_overflow && (Int16)(volts_reg & 0x01) == 0x01)
-            {
-                throw new CINA219CException("Over Flow");
-            }
+            ovf = Convert.ToBoolean(volts_reg & 0x1);
 
             // Shift to the right 3 to drop CNVR and OVF and multiply by LSB
             volts_reg = (Int16)(volts_reg >> 3);
-            double volts = volts_reg * 4e-3;
+            float volts = volts_reg * 4e-3f;
             return volts;
         }
 
-        public double GetCurrent()
+        public float GetCurrent()
         {
             _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_CURRENT);
             Int16 current_reg = _fti2c.ReadRegister(INA219_ADDRESS);
-            double current = current_reg / _ina219_currentDivider_mA;
+            float current = current_reg / _ina219_currentDivider_mA;
 
             return current;
         }
+
+        public float GetPower()
+        {
+            _fti2c.RegisterPointerSet(INA219_ADDRESS, false, INA219_REG_POWER);
+            Int16 reg = _fti2c.ReadRegister(INA219_ADDRESS);
+            float power = reg / _ina219_powerDivider_mW;
+
+            return power;
+        }
+
     }
 
     public class CINA219CException : Exception
