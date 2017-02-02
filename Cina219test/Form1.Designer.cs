@@ -17,6 +17,9 @@
             {
                 components.Dispose();
             }
+
+            this._cina219.Dispose();
+
             base.Dispose(disposing);
         }
 

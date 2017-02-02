@@ -14,7 +14,7 @@ namespace CINA219
     /// <summary>
     /// 
     /// </summary>
-    public class Cina219
+    public class Cina219:IDisposable
     {
         const byte INA219_READ = (0x01);
 
@@ -277,6 +277,10 @@ namespace CINA219
             return power;
         }
 
+        public void Dispose()
+        {
+            _fti2c.Dispose();
+        }
     }
 
     public class CINA219CException : Exception

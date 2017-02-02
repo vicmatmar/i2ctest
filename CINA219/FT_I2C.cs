@@ -16,7 +16,7 @@ namespace CINA219
     ///  http://www.ftdichip.com/Support/Documents/AppNotes/AN_113_FTDI_Hi_Speed_USB_To_I2C_Example.pdf
     /// </summary>
 
-    class FTI2C
+    class FTI2C : IDisposable
     {
         const byte MSB_FALLING_EDGE_CLOCK_BYTE_IN = 0x20;
         const byte MSB_FALLING_EDGE_CLOCK_BYTE_OUT = 0x11;
@@ -444,6 +444,12 @@ namespace CINA219
             return inputBuffer;
         }
 
+        public void Dispose()
+        {
+            
+            if (_ftdi != null)
+                _ftdi.Close();
+        }
     }
 
     class FTI2CException : Exception
