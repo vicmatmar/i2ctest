@@ -10,19 +10,25 @@ using System.Windows.Forms;
 
 using System.Threading;
 
-using CINA219;
+using Centralite.CurrentSensor;
 
 namespace Cina219test
 {
     public partial class Form1 : Form
     {
+        int _i2c_controller_index = 0;
 
-        Cina219 _cina219;
-        byte _cina219_address = 0x40;
+        Cina219 _cina219_1;
+        Cina219 _cina219_2;
+
+        byte _cina219_address1 = 0x40;
+        byte _cina219_address2 = 0x41;
 
         Task _read_task;
         CancellationTokenSource _cancel_read_task;
-        UInt16 _ina219_calValue;
+
+        UInt16 _ina219_calValue1;
+        UInt16 _ina219_calValue2;
 
         public Form1()
         {
@@ -32,21 +38,36 @@ namespace Cina219test
         private void Form1_Load(object sender, EventArgs e)
         {
             // Make sure we have a i2c controller attached
-            int i2c_controller_index = Cina219.GetFirstDevIndex();
-            if (i2c_controller_index < 0)
+            _i2c_controller_index = Cina219.GetFirstDevIndex();
+            if (_i2c_controller_index < 0)
                 throw new Exception("FT232H not found");
 
             // Init controller
-            _cina219 = new Cina219(_cina219_address, i2c_controller_index);
-            _cina219.Init();
-
-            _ina219_calValue = _cina219.ReadCalibration();
-            numericUpDown_cal.Value = _ina219_calValue;
+            initCina219();
 
             button_single.Enabled = false;
             button_start.Text = "Stop";
 
+            label_address1.Text = string.Format("Address: 0x{0:X}", _cina219_address1);
+            label_address2.Text = string.Format("Address: 0x{0:X}", _cina219_address2);
+
             start_read_task();
+        }
+
+        void initCina219()
+        {
+            _cina219_1 = new Cina219(_cina219_address1, _i2c_controller_index);
+            _cina219_1.Init();
+
+            _ina219_calValue1 = _cina219_1.ReadCalibration();
+            numericUpDown_cal1.Value = _ina219_calValue1;
+
+            _cina219_2 = new Cina219(_cina219_1.I2CController, _cina219_address2);
+            _cina219_2.Init();
+
+            _ina219_calValue2 = _cina219_2.ReadCalibration();
+            numericUpDown_cal2.Value = _ina219_calValue2;
+
         }
 
         void start_read_task()
@@ -55,6 +76,7 @@ namespace Cina219test
             _read_task = new Task(() => read_data_continous(_cancel_read_task.Token), _cancel_read_task.Token);
             _read_task.ContinueWith(ct => read_data_done(_read_task), TaskContinuationOptions.OnlyOnRanToCompletion);
             _read_task.Start();
+
         }
 
         void read_data_done(Task t)
@@ -82,37 +104,102 @@ namespace Cina219test
             }
         }
 
+
         void read_data()
         {
-            UInt16 cal_val = _cina219.ReadCalibration();
+            UInt16 cal_val = _cina219_1.ReadCalibration();
             string text = string.Format("0x{0:X}", cal_val);
-            syncLabelSetTextAndColor(label_calibration, text, Color.Black);
-            if (cal_val != _ina219_calValue)
+            syncLabelSetTextAndColor(label_calibration1, text, Color.Black);
+            if (cal_val != _ina219_calValue1)
             {
-                UInt16 newval = (UInt16)numericUpDown_cal.Value;
-                _cina219.WriteCalibration(newval);
+                UInt16 newval = (UInt16)numericUpDown_cal1.Value;
+                _cina219_1.WriteCalibration(newval);
             }
 
-            float volts_shunt = _cina219.GetShuntVoltage();
+            float volts_shunt = _cina219_1.GetShuntVoltage();
             text = string.Format("{0,5:F3}", volts_shunt);
-            syncLabelSetTextAndColor(label_voltage_shunt, text, Color.Black);
+            syncLabelSetTextAndColor(label_voltage_shunt1, text, Color.Black);
 
             bool ovf = false;
-            float volts = _cina219.GetVoltage(ref ovf);
+            float volts = _cina219_1.GetVoltage(ref ovf);
             text = string.Format("{0,5:F3}", volts);
-            syncLabelSetTextAndColor(label_voltage_bus, text, Color.Black);
+            syncLabelSetTextAndColor(label_voltage_bus1, text, Color.Black);
 
-            float current = _cina219.GetCurrent();
+            float current = _cina219_1.GetCurrent();
             text = string.Format("{0,5:F2}", current);
             if (ovf)
                 text += "*";
-            syncLabelSetTextAndColor(label_current, text, Color.Black);
+            syncLabelSetTextAndColor(label_current1, text, Color.Black);
 
-            float power = _cina219.GetPower();
+            float power = _cina219_1.GetPower();
             text = string.Format("{0,5:F2}", power);
-            syncLabelSetTextAndColor(label_power, text, Color.Black);
+            syncLabelSetTextAndColor(label_power1, text, Color.Black);
+
+
+
+            cal_val = _cina219_2.ReadCalibration();
+            text = string.Format("0x{0:X}", cal_val);
+            syncLabelSetTextAndColor(label_calibration2, text, Color.Black);
+            if (cal_val != _ina219_calValue2)
+            {
+                UInt16 newval = (UInt16)numericUpDown_cal2.Value;
+                _cina219_2.WriteCalibration(newval);
+            }
+
+            volts_shunt = _cina219_2.GetShuntVoltage();
+            text = string.Format("{0,5:F3}", volts_shunt);
+            syncLabelSetTextAndColor(label_voltage_shunt2, text, Color.Black);
+
+            ovf = false;
+            volts = _cina219_2.GetVoltage(ref ovf);
+            text = string.Format("{0,5:F3}", volts);
+            syncLabelSetTextAndColor(label_voltage_bus2, text, Color.Black);
+
+            current = _cina219_2.GetCurrent();
+            text = string.Format("{0,5:F2}", current);
+            if (ovf)
+                text += "*";
+            syncLabelSetTextAndColor(label_current2, text, Color.Black);
+
+            power = _cina219_2.GetPower();
+            text = string.Format("{0,5:F2}", power);
+            syncLabelSetTextAndColor(label_power2, text, Color.Black);
 
         }
+
+        void read_data2()
+        {
+            UInt16 cal_val = _cina219_2.ReadCalibration();
+            string text = string.Format("0x{0:X}", cal_val);
+            syncLabelSetTextAndColor(label_calibration2, text, Color.Black);
+            if (cal_val != _ina219_calValue2)
+            {
+                UInt16 newval = (UInt16)numericUpDown_cal2.Value;
+                _cina219_2.WriteCalibration(newval);
+            }
+
+            float volts_shunt = _cina219_2.GetShuntVoltage();
+            text = string.Format("{0,5:F3}", volts_shunt);
+            syncLabelSetTextAndColor(label_voltage_shunt2, text, Color.Black);
+
+            bool ovf = false;
+            float volts = _cina219_2.GetVoltage(ref ovf);
+            text = string.Format("{0,5:F3}", volts);
+            syncLabelSetTextAndColor(label_voltage_bus2, text, Color.Black);
+
+            float current = _cina219_2.GetCurrent();
+            text = string.Format("{0,5:F2}", current);
+            if (ovf)
+                text += "*";
+            syncLabelSetTextAndColor(label_current2, text, Color.Black);
+
+            float power = _cina219_2.GetPower();
+            text = string.Format("{0,5:F2}", power);
+            syncLabelSetTextAndColor(label_power2, text, Color.Black);
+
+        }
+
+
 
         void syncLabelSetTextAndColor(Label control, string text, Color forcolor)
         {
@@ -150,9 +237,17 @@ namespace Cina219test
 
         private void numericUpDown_cal_ValueChanged(object sender, EventArgs e)
         {
-            lock (numericUpDown_cal)
+            lock (numericUpDown_cal1)
             {
-                _ina219_calValue = (UInt16)numericUpDown_cal.Value;
+                _ina219_calValue1 = (UInt16)numericUpDown_cal1.Value;
+            }
+        }
+
+        private void numericUpDown_cal2_ValueChanged(object sender, EventArgs e)
+        {
+            lock (numericUpDown_cal2)
+            {
+                _ina219_calValue2 = (UInt16)numericUpDown_cal2.Value;
             }
         }
 
@@ -175,5 +270,6 @@ namespace Cina219test
         {
             read_data();
         }
+
     }
 }

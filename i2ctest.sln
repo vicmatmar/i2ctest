@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CINA219", "CINA219\CINA219.csproj", "{AD7DDC93-E405-481A-8AD7-73502728390F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cina219test", "Cina219test\Cina219test.csproj", "{AE640B30-D127-4380-8C7F-5071F7BD6755}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Centralite.CurrentSensor", "..\..\..\GitHub\PROTST\internal-common\Centralite.CurrentSensor\Centralite.CurrentSensor.csproj", "{AFFBFB9E-8CB7-4EAD-804D-E863F306926B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AD7DDC93-E405-481A-8AD7-73502728390F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD7DDC93-E405-481A-8AD7-73502728390F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD7DDC93-E405-481A-8AD7-73502728390F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD7DDC93-E405-481A-8AD7-73502728390F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE640B30-D127-4380-8C7F-5071F7BD6755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE640B30-D127-4380-8C7F-5071F7BD6755}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE640B30-D127-4380-8C7F-5071F7BD6755}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE640B30-D127-4380-8C7F-5071F7BD6755}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFBFB9E-8CB7-4EAD-804D-E863F306926B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFBFB9E-8CB7-4EAD-804D-E863F306926B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFBFB9E-8CB7-4EAD-804D-E863F306926B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFBFB9E-8CB7-4EAD-804D-E863F306926B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

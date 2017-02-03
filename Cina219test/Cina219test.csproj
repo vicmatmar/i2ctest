@@ -80,9 +80,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CINA219\CINA219.csproj">
-      <Project>{ad7ddc93-e405-481a-8ad7-73502728390f}</Project>
-      <Name>CINA219</Name>
+    <ProjectReference Include="..\..\..\..\GitHub\PROTST\internal-common\Centralite.CurrentSensor\Centralite.CurrentSensor.csproj">
+      <Project>{affbfb9e-8cb7-4ead-804d-e863f306926b}</Project>
+      <Name>Centralite.CurrentSensor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
