@@ -130,6 +130,14 @@ namespace Cina219test
             if (ovf)
                 text += "*";
             syncLabelSetTextAndColor(label_current1, text, Color.Black);
+            if (current > 1.0)
+            {
+                _cina219_1.SetACBusPins(0xFE, 0xFF);
+            }
+            else
+            {
+                _cina219_1.SetACBusPins(0xFF, 0xFF);
+            }
 
             float power = _cina219_1.GetPower();
             text = string.Format("{0,5:F2}", power);
@@ -166,39 +174,6 @@ namespace Cina219test
             syncLabelSetTextAndColor(label_power2, text, Color.Black);
 
         }
-
-        void read_data2()
-        {
-            UInt16 cal_val = _cina219_2.ReadCalibration();
-            string text = string.Format("0x{0:X}", cal_val);
-            syncLabelSetTextAndColor(label_calibration2, text, Color.Black);
-            if (cal_val != _ina219_calValue2)
-            {
-                UInt16 newval = (UInt16)numericUpDown_cal2.Value;
-                _cina219_2.WriteCalibration(newval);
-            }
-
-            float volts_shunt = _cina219_2.GetShuntVoltage();
-            text = string.Format("{0,5:F3}", volts_shunt);
-            syncLabelSetTextAndColor(label_voltage_shunt2, text, Color.Black);
-
-            bool ovf = false;
-            float volts = _cina219_2.GetVoltage(ref ovf);
-            text = string.Format("{0,5:F3}", volts);
-            syncLabelSetTextAndColor(label_voltage_bus2, text, Color.Black);
-
-            float current = _cina219_2.GetCurrent();
-            text = string.Format("{0,5:F2}", current);
-            if (ovf)
-                text += "*";
-            syncLabelSetTextAndColor(label_current2, text, Color.Black);
-
-            float power = _cina219_2.GetPower();
-            text = string.Format("{0,5:F2}", power);
-            syncLabelSetTextAndColor(label_power2, text, Color.Black);
-
-        }
-
 
 
         void syncLabelSetTextAndColor(Label control, string text, Color forcolor)
@@ -271,5 +246,9 @@ namespace Cina219test
             read_data();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _cina219_1.SetACBusPins(0xFE, 0xFF);
+        }
     }
 }

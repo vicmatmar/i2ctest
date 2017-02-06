@@ -66,6 +66,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,7 +81,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\GitHub\PROTST\internal-common\Centralite.CurrentSensor\Centralite.CurrentSensor.csproj">
+    <ProjectReference Include="..\..\..\..\GitHub\HomeAutomationTester\Centralite.CurrentSensor\Centralite.CurrentSensor.csproj">
       <Project>{affbfb9e-8cb7-4ead-804d-e863f306926b}</Project>
       <Name>Centralite.CurrentSensor</Name>
     </ProjectReference>
