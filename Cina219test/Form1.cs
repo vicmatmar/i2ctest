@@ -130,13 +130,19 @@ namespace Cina219test
             if (ovf)
                 text += "*";
             syncLabelSetTextAndColor(label_current1, text, Color.Black);
-            if (current > 1.0)
+            if (current > 20.0)
             {
-                _cina219_1.SetACBusPins(0xFE, 0xFF);
+                // Trun LED ON, C0 low
+                byte led_bit = _cina219_1.GetACBusPins();
+                led_bit = (byte)(led_bit & 0xFE);
+                _cina219_1.SetACBusPins(led_bit, 0xFF);
             }
             else
             {
-                _cina219_1.SetACBusPins(0xFF, 0xFF);
+                // Trun LED OFF, C0 high
+                byte led_bit = _cina219_1.GetACBusPins();
+                led_bit = (byte)(led_bit | 0x01);
+                _cina219_1.SetACBusPins(led_bit, 0xFF);
             }
 
             float power = _cina219_1.GetPower();
