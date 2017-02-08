@@ -18,7 +18,8 @@
                 components.Dispose();
             }
 
-            this._cina219_1.Dispose();
+            foreach(Centralite.CurrentSensor.Cina219 sensor in _sensors)
+                sensor.Dispose();
 
             base.Dispose(disposing);
         }

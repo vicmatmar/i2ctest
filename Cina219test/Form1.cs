@@ -18,17 +18,14 @@ namespace Cina219test
     {
         int _i2c_controller_index = 0;
 
-        Cina219 _cina219_1;
-        Cina219 _cina219_2;
-
-        byte _cina219_address1 = 0x40;
-        byte _cina219_address2 = 0x41;
+        Cina219[] _sensors;
+        byte[] _sensor_addresses = new byte[] { 0x40, 0x41, 0x44, 0x45 };
+        int _total_sensors = 2;
 
         Task _read_task;
         CancellationTokenSource _cancel_read_task;
 
-        UInt16 _ina219_calValue1;
-        UInt16 _ina219_calValue2;
+        UInt16[] _sensor_calvals;
 
         public Form1()
         {
@@ -48,25 +45,28 @@ namespace Cina219test
             button_single.Enabled = false;
             button_start.Text = "Stop";
 
-            label_address1.Text = string.Format("Address: 0x{0:X}", _cina219_address1);
-            label_address2.Text = string.Format("Address: 0x{0:X}", _cina219_address2);
+            label_address1.Text = string.Format("Address: 0x{0:X}", _sensors[0].INA219_ADDRESS);
+            label_address2.Text = string.Format("Address: 0x{0:X}", _sensors[1].INA219_ADDRESS);
 
             start_read_task();
         }
 
         void initCina219()
         {
-            _cina219_1 = new Cina219(_cina219_address1, _i2c_controller_index);
-            _cina219_1.Init();
+            _sensors = new Cina219[_total_sensors];
 
-            _ina219_calValue1 = _cina219_1.ReadCalibration();
-            numericUpDown_cal1.Value = _ina219_calValue1;
+            _sensors[0] = new Cina219(_sensor_addresses[0], _i2c_controller_index);
+            _sensors[0].Init();
 
-            _cina219_2 = new Cina219(_cina219_1.I2CController, _cina219_address2);
-            _cina219_2.Init();
+            _sensor_calvals = new UInt16[_total_sensors];
+            _sensor_calvals[0] = _sensors[0].ReadCalibration();
+            numericUpDown_cal1.Value = _sensor_calvals[0];
 
-            _ina219_calValue2 = _cina219_2.ReadCalibration();
-            numericUpDown_cal2.Value = _ina219_calValue2;
+            _sensors[1] = new Cina219(_sensors[0].I2CController, _sensor_addresses[1]);
+            _sensors[1].Init();
+
+            _sensor_calvals[1] = _sensors[1].ReadCalibration();
+            numericUpDown_cal2.Value = _sensor_calvals[1];
 
         }
 
@@ -107,25 +107,25 @@ namespace Cina219test
 
         void read_data()
         {
-            UInt16 cal_val = _cina219_1.ReadCalibration();
+            UInt16 cal_val = _sensors[0].ReadCalibration();
             string text = string.Format("0x{0:X}", cal_val);
             syncLabelSetTextAndColor(label_calibration1, text, Color.Black);
-            if (cal_val != _ina219_calValue1)
+            if (cal_val != _sensor_calvals[0])
             {
                 UInt16 newval = (UInt16)numericUpDown_cal1.Value;
-                _cina219_1.WriteCalibration(newval);
+                _sensors[0].WriteCalibration(newval);
             }
 
-            float volts_shunt = _cina219_1.GetShuntVoltage();
+            float volts_shunt = _sensors[0].GetShuntVoltage();
             text = string.Format("{0,5:F3}", volts_shunt);
             syncLabelSetTextAndColor(label_voltage_shunt1, text, Color.Black);
 
             bool ovf = false;
-            float volts = _cina219_1.GetVoltage(ref ovf);
+            float volts = _sensors[0].GetVoltage(ref ovf);
             text = string.Format("{0,5:F3}", volts);
             syncLabelSetTextAndColor(label_voltage_bus1, text, Color.Black);
 
-            float current = _cina219_1.GetCurrent();
+            float current = _sensors[0].GetCurrent();
             text = string.Format("{0,5:F2}", current);
             if (ovf)
                 text += "*";
@@ -133,49 +133,49 @@ namespace Cina219test
             if (current > 20.0)
             {
                 // Trun LED ON, C0 low
-                byte led_bit = _cina219_1.GetACBusPins();
+                byte led_bit = _sensors[0].GetACBusPins();
                 led_bit = (byte)(led_bit & 0xFE);
-                _cina219_1.SetACBusPins(led_bit, 0xFF);
+                _sensors[0].SetACBusPins(led_bit, 0xFF);
             }
             else
             {
                 // Trun LED OFF, C0 high
-                byte led_bit = _cina219_1.GetACBusPins();
+                byte led_bit = _sensors[0].GetACBusPins();
                 led_bit = (byte)(led_bit | 0x01);
-                _cina219_1.SetACBusPins(led_bit, 0xFF);
+                _sensors[0].SetACBusPins(led_bit, 0xFF);
             }
 
-            float power = _cina219_1.GetPower();
+            float power = _sensors[0].GetPower();
             text = string.Format("{0,5:F2}", power);
             syncLabelSetTextAndColor(label_power1, text, Color.Black);
 
 
 
-            cal_val = _cina219_2.ReadCalibration();
+            cal_val = _sensors[1].ReadCalibration();
             text = string.Format("0x{0:X}", cal_val);
             syncLabelSetTextAndColor(label_calibration2, text, Color.Black);
-            if (cal_val != _ina219_calValue2)
+            if (cal_val != _sensor_calvals[1])
             {
                 UInt16 newval = (UInt16)numericUpDown_cal2.Value;
-                _cina219_2.WriteCalibration(newval);
+                _sensors[1].WriteCalibration(newval);
             }
 
-            volts_shunt = _cina219_2.GetShuntVoltage();
+            volts_shunt = _sensors[1].GetShuntVoltage();
             text = string.Format("{0,5:F3}", volts_shunt);
             syncLabelSetTextAndColor(label_voltage_shunt2, text, Color.Black);
 
             ovf = false;
-            volts = _cina219_2.GetVoltage(ref ovf);
+            volts = _sensors[1].GetVoltage(ref ovf);
             text = string.Format("{0,5:F3}", volts);
             syncLabelSetTextAndColor(label_voltage_bus2, text, Color.Black);
 
-            current = _cina219_2.GetCurrent();
+            current = _sensors[1].GetCurrent();
             text = string.Format("{0,5:F2}", current);
             if (ovf)
                 text += "*";
             syncLabelSetTextAndColor(label_current2, text, Color.Black);
 
-            power = _cina219_2.GetPower();
+            power = _sensors[1].GetPower();
             text = string.Format("{0,5:F2}", power);
             syncLabelSetTextAndColor(label_power2, text, Color.Black);
 
@@ -220,7 +220,7 @@ namespace Cina219test
         {
             lock (numericUpDown_cal1)
             {
-                _ina219_calValue1 = (UInt16)numericUpDown_cal1.Value;
+                _sensor_calvals[0] = (UInt16)numericUpDown_cal1.Value;
             }
         }
 
@@ -228,7 +228,7 @@ namespace Cina219test
         {
             lock (numericUpDown_cal2)
             {
-                _ina219_calValue2 = (UInt16)numericUpDown_cal2.Value;
+                _sensor_calvals[1] = (UInt16)numericUpDown_cal2.Value;
             }
         }
 
@@ -252,9 +252,5 @@ namespace Cina219test
             read_data();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            _cina219_1.SetACBusPins(0xFE, 0xFF);
-        }
     }
 }
