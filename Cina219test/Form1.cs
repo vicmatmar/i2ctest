@@ -20,7 +20,7 @@ namespace Cina219test
 
         Cina219[] _sensors;
         byte[] _sensor_addresses = new byte[] { 0x40, 0x41, 0x44, 0x45 };
-        int _total_sensors = 2;
+        int _total_sensors = 3;
 
         Task _read_task;
         CancellationTokenSource _cancel_read_task;
@@ -45,8 +45,13 @@ namespace Cina219test
             button_single.Enabled = false;
             button_start.Text = "Stop";
 
-            label_address1.Text = string.Format("Address: 0x{0:X}", _sensors[0].INA219_ADDRESS);
-            label_address2.Text = string.Format("Address: 0x{0:X}", _sensors[1].INA219_ADDRESS);
+            for(int i = 0; i < _total_sensors; i++)
+            {
+                string ctrlname = string.Format("label_address{0}", i + 1);
+                Label control = (Label)Controls.Find(ctrlname, true)[0];
+                control.Text = string.Format("Address: 0x{0:X}", _sensors[i].INA219_ADDRESS);
+
+            }
 
             start_read_task();
         }
@@ -62,11 +67,18 @@ namespace Cina219test
             _sensor_calvals[0] = _sensors[0].ReadCalibration();
             numericUpDown_cal1.Value = _sensor_calvals[0];
 
-            _sensors[1] = new Cina219(_sensors[0].I2CController, _sensor_addresses[1]);
-            _sensors[1].Init();
+            for(int i = 1; i < _total_sensors; i++)
+            {
+                _sensors[i] = new Cina219(_sensors[0].I2CController, _sensor_addresses[i]);
+                _sensors[i].Init();
 
-            _sensor_calvals[1] = _sensors[1].ReadCalibration();
-            numericUpDown_cal2.Value = _sensor_calvals[1];
+                _sensor_calvals[i] = _sensors[i].ReadCalibration();
+
+                string ctrlname = string.Format("numericUpDown_cal{0}", i + 1);
+                NumericUpDown control = (NumericUpDown)Controls.Find(ctrlname, true)[0];
+                control.Value = _sensor_calvals[i];
+
+            }
 
         }
 
@@ -216,6 +228,15 @@ namespace Cina219test
             {
                 _sensor_calvals[1] = (UInt16)numericUpDown_cal2.Value;
             }
+        }
+
+        private void numericUpDown_cal3_ValueChanged(object sender, EventArgs e)
+        {
+            lock (numericUpDown_cal3)
+            {
+                _sensor_calvals[2] = (UInt16)numericUpDown_cal3.Value;
+            }
+
         }
 
         private void button_start_Click(object sender, EventArgs e)
