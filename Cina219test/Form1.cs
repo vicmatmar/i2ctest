@@ -216,27 +216,12 @@ namespace Cina219test
 
         private void numericUpDown_cal_ValueChanged(object sender, EventArgs e)
         {
-            lock (numericUpDown_cal1)
+            NumericUpDown control = (NumericUpDown)sender;
+            int index = Convert.ToInt32(control.Tag);
+            lock (control)
             {
-                _sensor_calvals[0] = (UInt16)numericUpDown_cal1.Value;
+                _sensor_calvals[index] = (UInt16)control.Value;
             }
-        }
-
-        private void numericUpDown_cal2_ValueChanged(object sender, EventArgs e)
-        {
-            lock (numericUpDown_cal2)
-            {
-                _sensor_calvals[1] = (UInt16)numericUpDown_cal2.Value;
-            }
-        }
-
-        private void numericUpDown_cal3_ValueChanged(object sender, EventArgs e)
-        {
-            lock (numericUpDown_cal3)
-            {
-                _sensor_calvals[2] = (UInt16)numericUpDown_cal3.Value;
-            }
-
         }
 
         private void button_start_Click(object sender, EventArgs e)

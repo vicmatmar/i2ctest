@@ -100,6 +100,7 @@
             this.numericUpDown_cal1.Name = "numericUpDown_cal1";
             this.numericUpDown_cal1.Size = new System.Drawing.Size(56, 22);
             this.numericUpDown_cal1.TabIndex = 4;
+            this.numericUpDown_cal1.Tag = "0";
             this.numericUpDown_cal1.ValueChanged += new System.EventHandler(this.numericUpDown_cal_ValueChanged);
             // 
             // tableLayoutPanel
@@ -143,6 +144,7 @@
             this.label_voltage_bus1.Name = "label_voltage_bus1";
             this.label_voltage_bus1.Size = new System.Drawing.Size(46, 16);
             this.label_voltage_bus1.TabIndex = 0;
+            this.label_voltage_bus1.Tag = "0";
             this.label_voltage_bus1.Text = "0.0000";
             this.label_voltage_bus1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -208,6 +210,7 @@
             this.label_voltage_shunt1.Name = "label_voltage_shunt1";
             this.label_voltage_shunt1.Size = new System.Drawing.Size(46, 16);
             this.label_voltage_shunt1.TabIndex = 3;
+            this.label_voltage_shunt1.Tag = "0";
             this.label_voltage_shunt1.Text = "0.0000";
             this.label_voltage_shunt1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -221,6 +224,7 @@
             this.label_calibration1.Name = "label_calibration1";
             this.label_calibration1.Size = new System.Drawing.Size(46, 28);
             this.label_calibration1.TabIndex = 6;
+            this.label_calibration1.Tag = "0";
             this.label_calibration1.Text = "0.0000";
             this.label_calibration1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -234,6 +238,7 @@
             this.label_current1.Name = "label_current1";
             this.label_current1.Size = new System.Drawing.Size(46, 16);
             this.label_current1.TabIndex = 5;
+            this.label_current1.Tag = "0";
             this.label_current1.Text = "0.0000";
             this.label_current1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -258,6 +263,7 @@
             this.label_power1.Name = "label_power1";
             this.label_power1.Size = new System.Drawing.Size(46, 16);
             this.label_power1.TabIndex = 9;
+            this.label_power1.Tag = "0";
             this.label_power1.Text = "0.0000";
             this.label_power1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -289,6 +295,7 @@
             this.label_address1.Name = "label_address1";
             this.label_address1.Size = new System.Drawing.Size(54, 16);
             this.label_address1.TabIndex = 6;
+            this.label_address1.Tag = "0";
             this.label_address1.Text = "Adress:";
             // 
             // tableLayoutPanel1
@@ -332,6 +339,7 @@
             this.label_voltage_bus2.Name = "label_voltage_bus2";
             this.label_voltage_bus2.Size = new System.Drawing.Size(46, 16);
             this.label_voltage_bus2.TabIndex = 0;
+            this.label_voltage_bus2.Tag = "1";
             this.label_voltage_bus2.Text = "0.0000";
             this.label_voltage_bus2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -397,6 +405,7 @@
             this.label_voltage_shunt2.Name = "label_voltage_shunt2";
             this.label_voltage_shunt2.Size = new System.Drawing.Size(46, 16);
             this.label_voltage_shunt2.TabIndex = 3;
+            this.label_voltage_shunt2.Tag = "1";
             this.label_voltage_shunt2.Text = "0.0000";
             this.label_voltage_shunt2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -419,7 +428,8 @@
             this.numericUpDown_cal2.Name = "numericUpDown_cal2";
             this.numericUpDown_cal2.Size = new System.Drawing.Size(56, 22);
             this.numericUpDown_cal2.TabIndex = 4;
-            this.numericUpDown_cal2.ValueChanged += new System.EventHandler(this.numericUpDown_cal2_ValueChanged);
+            this.numericUpDown_cal2.Tag = "1";
+            this.numericUpDown_cal2.ValueChanged += new System.EventHandler(this.numericUpDown_cal_ValueChanged);
             // 
             // label_calibration2
             // 
@@ -431,6 +441,7 @@
             this.label_calibration2.Name = "label_calibration2";
             this.label_calibration2.Size = new System.Drawing.Size(46, 28);
             this.label_calibration2.TabIndex = 6;
+            this.label_calibration2.Tag = "1";
             this.label_calibration2.Text = "0.0000";
             this.label_calibration2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -444,6 +455,7 @@
             this.label_current2.Name = "label_current2";
             this.label_current2.Size = new System.Drawing.Size(46, 16);
             this.label_current2.TabIndex = 5;
+            this.label_current2.Tag = "1";
             this.label_current2.Text = "0.0000";
             this.label_current2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -468,6 +480,7 @@
             this.label_power2.Name = "label_power2";
             this.label_power2.Size = new System.Drawing.Size(46, 16);
             this.label_power2.TabIndex = 9;
+            this.label_power2.Tag = "1";
             this.label_power2.Text = "0.0000";
             this.label_power2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -479,6 +492,7 @@
             this.label_address2.Name = "label_address2";
             this.label_address2.Size = new System.Drawing.Size(54, 16);
             this.label_address2.TabIndex = 9;
+            this.label_address2.Tag = "1";
             this.label_address2.Text = "Adress:";
             // 
             // label_address3
@@ -489,6 +503,7 @@
             this.label_address3.Name = "label_address3";
             this.label_address3.Size = new System.Drawing.Size(54, 16);
             this.label_address3.TabIndex = 11;
+            this.label_address3.Tag = "2";
             this.label_address3.Text = "Adress:";
             // 
             // tableLayoutPanel2
@@ -532,6 +547,7 @@
             this.label_voltage_bus3.Name = "label_voltage_bus3";
             this.label_voltage_bus3.Size = new System.Drawing.Size(46, 16);
             this.label_voltage_bus3.TabIndex = 0;
+            this.label_voltage_bus3.Tag = "2";
             this.label_voltage_bus3.Text = "0.0000";
             this.label_voltage_bus3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -597,6 +613,7 @@
             this.label_voltage_shunt3.Name = "label_voltage_shunt3";
             this.label_voltage_shunt3.Size = new System.Drawing.Size(46, 16);
             this.label_voltage_shunt3.TabIndex = 3;
+            this.label_voltage_shunt3.Tag = "2";
             this.label_voltage_shunt3.Text = "0.0000";
             this.label_voltage_shunt3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -619,7 +636,8 @@
             this.numericUpDown_cal3.Name = "numericUpDown_cal3";
             this.numericUpDown_cal3.Size = new System.Drawing.Size(56, 22);
             this.numericUpDown_cal3.TabIndex = 4;
-            this.numericUpDown_cal3.ValueChanged += new System.EventHandler(this.numericUpDown_cal3_ValueChanged);
+            this.numericUpDown_cal3.Tag = "2";
+            this.numericUpDown_cal3.ValueChanged += new System.EventHandler(this.numericUpDown_cal_ValueChanged);
             // 
             // label_calibration3
             // 
@@ -631,6 +649,7 @@
             this.label_calibration3.Name = "label_calibration3";
             this.label_calibration3.Size = new System.Drawing.Size(46, 28);
             this.label_calibration3.TabIndex = 6;
+            this.label_calibration3.Tag = "2";
             this.label_calibration3.Text = "0.0000";
             this.label_calibration3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -655,6 +674,7 @@
             this.label_power3.Name = "label_power3";
             this.label_power3.Size = new System.Drawing.Size(46, 16);
             this.label_power3.TabIndex = 9;
+            this.label_power3.Tag = "2";
             this.label_power3.Text = "0.0000";
             this.label_power3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -668,6 +688,7 @@
             this.label_current3.Name = "label_current3";
             this.label_current3.Size = new System.Drawing.Size(46, 16);
             this.label_current3.TabIndex = 5;
+            this.label_current3.Tag = "2";
             this.label_current3.Text = "0.0000";
             this.label_current3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
