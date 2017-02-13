@@ -45,12 +45,28 @@ namespace Cina219test
             button_single.Enabled = false;
             button_start.Text = "Stop";
 
-            for(int i = 0; i < _total_sensors; i++)
+            // Disable all panels
+            int n = 0;
+            while(true)
             {
-                string ctrlname = string.Format("label_address{0}", i + 1);
-                Label control = (Label)Controls.Find(ctrlname, true)[0];
-                control.Text = string.Format("Address: 0x{0:X}", _sensors[i].INA219_ADDRESS);
+                string ctrlname = string.Format("tableLayoutPanel{0}", n++);
+                Control[] controls = Controls.Find(ctrlname, true);
+                if (controls.Length > 0)
+                    controls[0].Enabled = false;
+                else
+                    break;
+            }
 
+            for (int i = 0; i < _total_sensors; i++)
+            {
+                string ctrlname = string.Format("label_addr{0}", i);
+                Label control = (Label)Controls.Find(ctrlname, true)[0];
+                control.Text = string.Format("0x{0:X}", _sensors[i].INA219_ADDRESS);
+
+                // Enable panel
+                ctrlname = string.Format("tableLayoutPanel{0}", i);
+                Control[] controls = Controls.Find(ctrlname, true);
+                controls[0].Enabled = true;
             }
 
             start_read_task();
@@ -65,7 +81,7 @@ namespace Cina219test
 
             _sensor_calvals = new UInt16[_total_sensors];
             _sensor_calvals[0] = _sensors[0].ReadCalibration();
-            numericUpDown_cal1.Value = _sensor_calvals[0];
+            numericUpDown_cal0.Value = _sensor_calvals[0];
 
             for(int i = 1; i < _total_sensors; i++)
             {
@@ -74,7 +90,7 @@ namespace Cina219test
 
                 _sensor_calvals[i] = _sensors[i].ReadCalibration();
 
-                string ctrlname = string.Format("numericUpDown_cal{0}", i + 1);
+                string ctrlname = string.Format("numericUpDown_cal{0}", i);
                 NumericUpDown control = (NumericUpDown)Controls.Find(ctrlname, true)[0];
                 control.Value = _sensor_calvals[i];
 
@@ -123,11 +139,11 @@ namespace Cina219test
                 UInt16 cal_val = _sensors[i].ReadCalibration();
                 string text = string.Format("0x{0:X}", cal_val);
 
-                string ctrlname = string.Format("label_calibration{0}", i + 1);
+                string ctrlname = string.Format("label_calibration{0}", i);
                 syncLabelSetTextAndColor(ctrlname, text, Color.Black);
                 if (cal_val != _sensor_calvals[i])
                 {
-                    ctrlname = string.Format("numericUpDown_cal{0}", i + 1);
+                    ctrlname = string.Format("numericUpDown_cal{0}", i);
                     NumericUpDown control = (NumericUpDown)Controls.Find(ctrlname, true)[0];
                     UInt16 newval = (UInt16)control.Value;
                     _sensors[i].WriteCalibration(newval);
@@ -135,20 +151,20 @@ namespace Cina219test
 
                 float volts_shunt = _sensors[i].GetShuntVoltage();
                 text = string.Format("{0,5:F3}", volts_shunt);
-                ctrlname = string.Format("label_voltage_shunt{0}", i + 1);
+                ctrlname = string.Format("label_voltage_shunt{0}", i);
                 syncLabelSetTextAndColor(ctrlname, text, Color.Black);
 
                 bool ovf = false;
                 float volts = _sensors[i].GetVoltage(ref ovf);
                 text = string.Format("{0,5:F3}", volts);
-                ctrlname = string.Format("label_voltage_bus{0}", i + 1);
+                ctrlname = string.Format("label_voltage_bus{0}", i);
                 syncLabelSetTextAndColor(ctrlname, text, Color.Black);
 
                 float current = _sensors[i].GetCurrent();
                 text = string.Format("{0,5:F2}", current);
                 if (ovf)
                     text += "*";
-                ctrlname = string.Format("label_current{0}", i + 1);
+                ctrlname = string.Format("label_current{0}", i);
                 syncLabelSetTextAndColor(ctrlname, text, Color.Black);
                 //TODO fix this only reports one LED
                 if (current > 20.0)
@@ -168,7 +184,7 @@ namespace Cina219test
 
                 float power = _sensors[i].GetPower();
                 text = string.Format("{0,5:F2}", power);
-                ctrlname = string.Format("label_power{0}", i + 1);
+                ctrlname = string.Format("label_power{0}", i);
                 syncLabelSetTextAndColor(ctrlname, text, Color.Black);
 
             }

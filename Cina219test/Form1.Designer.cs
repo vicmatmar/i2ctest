@@ -32,121 +32,202 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.numericUpDown_cal1 = new System.Windows.Forms.NumericUpDown();
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.label_voltage_bus1 = new System.Windows.Forms.Label();
+            this.numericUpDown_cal0 = new System.Windows.Forms.NumericUpDown();
+            this.tableLayoutPanel0 = new System.Windows.Forms.TableLayoutPanel();
+            this.label_calibration0 = new System.Windows.Forms.Label();
+            this.label_power0 = new System.Windows.Forms.Label();
+            this.label_current0 = new System.Windows.Forms.Label();
+            this.label_address0 = new System.Windows.Forms.Label();
+            this.label_voltage_shunt0 = new System.Windows.Forms.Label();
+            this.label_voltage_bus0 = new System.Windows.Forms.Label();
+            this.label_addr0 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label_voltage_shunt1 = new System.Windows.Forms.Label();
-            this.label_calibration1 = new System.Windows.Forms.Label();
-            this.label_current1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label_power1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.button_start = new System.Windows.Forms.Button();
             this.button_single = new System.Windows.Forms.Button();
-            this.label_address1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label_voltage_bus2 = new System.Windows.Forms.Label();
+            this.label_voltage_bus1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label_voltage_shunt2 = new System.Windows.Forms.Label();
-            this.numericUpDown_cal2 = new System.Windows.Forms.NumericUpDown();
-            this.label_calibration2 = new System.Windows.Forms.Label();
-            this.label_current2 = new System.Windows.Forms.Label();
+            this.label_voltage_shunt1 = new System.Windows.Forms.Label();
+            this.numericUpDown_cal1 = new System.Windows.Forms.NumericUpDown();
+            this.label_calibration1 = new System.Windows.Forms.Label();
+            this.label_current1 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label_power2 = new System.Windows.Forms.Label();
+            this.label_power1 = new System.Windows.Forms.Label();
+            this.label_address1 = new System.Windows.Forms.Label();
             this.label_address2 = new System.Windows.Forms.Label();
-            this.label_address3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label_voltage_bus3 = new System.Windows.Forms.Label();
+            this.label_voltage_bus2 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label_voltage_shunt3 = new System.Windows.Forms.Label();
-            this.numericUpDown_cal3 = new System.Windows.Forms.NumericUpDown();
-            this.label_calibration3 = new System.Windows.Forms.Label();
+            this.label_voltage_shunt2 = new System.Windows.Forms.Label();
+            this.numericUpDown_cal2 = new System.Windows.Forms.NumericUpDown();
+            this.label_calibration2 = new System.Windows.Forms.Label();
+            this.label_current2 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.label_power3 = new System.Windows.Forms.Label();
-            this.label_current3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal1)).BeginInit();
-            this.tableLayoutPanel.SuspendLayout();
+            this.label_power2 = new System.Windows.Forms.Label();
+            this.label_addr1 = new System.Windows.Forms.Label();
+            this.label_addr2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal0)).BeginInit();
+            this.tableLayoutPanel0.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal2)).BeginInit();
             this.SuspendLayout();
             // 
-            // numericUpDown_cal1
+            // numericUpDown_cal0
             // 
-            this.numericUpDown_cal1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.numericUpDown_cal0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown_cal1.Hexadecimal = true;
-            this.numericUpDown_cal1.Increment = new decimal(new int[] {
+            this.numericUpDown_cal0.Hexadecimal = true;
+            this.numericUpDown_cal0.Increment = new decimal(new int[] {
             2,
             0,
             0,
             0});
-            this.numericUpDown_cal1.Location = new System.Drawing.Point(158, 67);
-            this.numericUpDown_cal1.Maximum = new decimal(new int[] {
+            this.numericUpDown_cal0.Location = new System.Drawing.Point(161, 83);
+            this.numericUpDown_cal0.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
-            this.numericUpDown_cal1.Name = "numericUpDown_cal1";
-            this.numericUpDown_cal1.Size = new System.Drawing.Size(56, 22);
-            this.numericUpDown_cal1.TabIndex = 4;
-            this.numericUpDown_cal1.Tag = "0";
-            this.numericUpDown_cal1.ValueChanged += new System.EventHandler(this.numericUpDown_cal_ValueChanged);
+            this.numericUpDown_cal0.Name = "numericUpDown_cal0";
+            this.numericUpDown_cal0.Size = new System.Drawing.Size(56, 22);
+            this.numericUpDown_cal0.TabIndex = 4;
+            this.numericUpDown_cal0.Tag = "0";
+            this.numericUpDown_cal0.ValueChanged += new System.EventHandler(this.numericUpDown_cal_ValueChanged);
             // 
-            // tableLayoutPanel
+            // tableLayoutPanel0
             // 
-            this.tableLayoutPanel.AutoSize = true;
-            this.tableLayoutPanel.ColumnCount = 3;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.Controls.Add(this.label_voltage_bus1, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.label4, 0, 4);
-            this.tableLayoutPanel.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel.Controls.Add(this.label_voltage_shunt1, 1, 1);
-            this.tableLayoutPanel.Controls.Add(this.numericUpDown_cal1, 2, 4);
-            this.tableLayoutPanel.Controls.Add(this.label_calibration1, 1, 4);
-            this.tableLayoutPanel.Controls.Add(this.label_current1, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.label5, 0, 3);
-            this.tableLayoutPanel.Controls.Add(this.label_power1, 1, 3);
-            this.tableLayoutPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel.Location = new System.Drawing.Point(19, 35);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 5;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(257, 92);
-            this.tableLayoutPanel.TabIndex = 3;
+            this.tableLayoutPanel0.AutoSize = true;
+            this.tableLayoutPanel0.ColumnCount = 3;
+            this.tableLayoutPanel0.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel0.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel0.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel0.Controls.Add(this.numericUpDown_cal0, 2, 5);
+            this.tableLayoutPanel0.Controls.Add(this.label_calibration0, 1, 5);
+            this.tableLayoutPanel0.Controls.Add(this.label_power0, 1, 4);
+            this.tableLayoutPanel0.Controls.Add(this.label_current0, 1, 3);
+            this.tableLayoutPanel0.Controls.Add(this.label_address0, 0, 0);
+            this.tableLayoutPanel0.Controls.Add(this.label_voltage_shunt0, 1, 2);
+            this.tableLayoutPanel0.Controls.Add(this.label_voltage_bus0, 1, 1);
+            this.tableLayoutPanel0.Controls.Add(this.label_addr0, 1, 0);
+            this.tableLayoutPanel0.Controls.Add(this.label4, 0, 5);
+            this.tableLayoutPanel0.Controls.Add(this.label5, 0, 4);
+            this.tableLayoutPanel0.Controls.Add(this.label3, 0, 3);
+            this.tableLayoutPanel0.Controls.Add(this.label2, 0, 2);
+            this.tableLayoutPanel0.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanel0.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableLayoutPanel0.Location = new System.Drawing.Point(19, 35);
+            this.tableLayoutPanel0.Name = "tableLayoutPanel0";
+            this.tableLayoutPanel0.RowCount = 6;
+            this.tableLayoutPanel0.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel0.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel0.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel0.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel0.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel0.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel0.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel0.Size = new System.Drawing.Size(257, 105);
+            this.tableLayoutPanel0.TabIndex = 3;
             // 
-            // label_voltage_bus1
+            // label_calibration0
             // 
-            this.label_voltage_bus1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label_calibration0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_voltage_bus1.AutoSize = true;
-            this.label_voltage_bus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_voltage_bus1.Location = new System.Drawing.Point(106, 0);
-            this.label_voltage_bus1.Name = "label_voltage_bus1";
-            this.label_voltage_bus1.Size = new System.Drawing.Size(46, 16);
-            this.label_voltage_bus1.TabIndex = 0;
-            this.label_voltage_bus1.Tag = "0";
-            this.label_voltage_bus1.Text = "0.0000";
-            this.label_voltage_bus1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label_calibration0.AutoSize = true;
+            this.label_calibration0.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_calibration0.Location = new System.Drawing.Point(106, 80);
+            this.label_calibration0.Name = "label_calibration0";
+            this.label_calibration0.Size = new System.Drawing.Size(46, 25);
+            this.label_calibration0.TabIndex = 6;
+            this.label_calibration0.Tag = "0";
+            this.label_calibration0.Text = "0.0000";
+            this.label_calibration0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_power0
+            // 
+            this.label_power0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_power0.AutoSize = true;
+            this.label_power0.Location = new System.Drawing.Point(106, 64);
+            this.label_power0.Name = "label_power0";
+            this.label_power0.Size = new System.Drawing.Size(46, 16);
+            this.label_power0.TabIndex = 9;
+            this.label_power0.Tag = "0";
+            this.label_power0.Text = "0.0000";
+            this.label_power0.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label_current0
+            // 
+            this.label_current0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_current0.AutoSize = true;
+            this.label_current0.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_current0.Location = new System.Drawing.Point(106, 48);
+            this.label_current0.Name = "label_current0";
+            this.label_current0.Size = new System.Drawing.Size(46, 16);
+            this.label_current0.TabIndex = 5;
+            this.label_current0.Tag = "0";
+            this.label_current0.Text = "0.0000";
+            this.label_current0.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label_address0
+            // 
+            this.label_address0.AutoSize = true;
+            this.label_address0.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label_address0.Location = new System.Drawing.Point(3, 0);
+            this.label_address0.Name = "label_address0";
+            this.label_address0.Size = new System.Drawing.Size(54, 16);
+            this.label_address0.TabIndex = 6;
+            this.label_address0.Tag = "0";
+            this.label_address0.Text = "Adress:";
+            // 
+            // label_voltage_shunt0
+            // 
+            this.label_voltage_shunt0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_voltage_shunt0.AutoSize = true;
+            this.label_voltage_shunt0.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_voltage_shunt0.Location = new System.Drawing.Point(106, 32);
+            this.label_voltage_shunt0.Name = "label_voltage_shunt0";
+            this.label_voltage_shunt0.Size = new System.Drawing.Size(46, 16);
+            this.label_voltage_shunt0.TabIndex = 3;
+            this.label_voltage_shunt0.Tag = "0";
+            this.label_voltage_shunt0.Text = "0.0000";
+            this.label_voltage_shunt0.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label_voltage_bus0
+            // 
+            this.label_voltage_bus0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_voltage_bus0.AutoSize = true;
+            this.label_voltage_bus0.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_voltage_bus0.Location = new System.Drawing.Point(106, 16);
+            this.label_voltage_bus0.Name = "label_voltage_bus0";
+            this.label_voltage_bus0.Size = new System.Drawing.Size(46, 16);
+            this.label_voltage_bus0.TabIndex = 0;
+            this.label_voltage_bus0.Tag = "0";
+            this.label_voltage_bus0.Text = "0.0000";
+            this.label_voltage_bus0.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label_addr0
+            // 
+            this.label_addr0.AutoSize = true;
+            this.label_addr0.Location = new System.Drawing.Point(106, 0);
+            this.label_addr0.Name = "label_addr0";
+            this.label_addr0.Size = new System.Drawing.Size(49, 16);
+            this.label_addr0.TabIndex = 10;
+            this.label_addr0.Text = "0x0000";
             // 
             // label4
             // 
@@ -154,38 +235,24 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 64);
+            this.label4.Location = new System.Drawing.Point(3, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 28);
+            this.label4.Size = new System.Drawing.Size(72, 25);
             this.label4.TabIndex = 7;
             this.label4.Text = "Calibration";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label1
+            // label5
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Voltage(bus):";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Voltage(shunt):";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(81, 16);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Power(mW):";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
             // 
@@ -193,79 +260,38 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 32);
+            this.label3.Location = new System.Drawing.Point(3, 48);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Current(mA):";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label_voltage_shunt1
+            // label2
             // 
-            this.label_voltage_shunt1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_voltage_shunt1.AutoSize = true;
-            this.label_voltage_shunt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_voltage_shunt1.Location = new System.Drawing.Point(106, 16);
-            this.label_voltage_shunt1.Name = "label_voltage_shunt1";
-            this.label_voltage_shunt1.Size = new System.Drawing.Size(46, 16);
-            this.label_voltage_shunt1.TabIndex = 3;
-            this.label_voltage_shunt1.Tag = "0";
-            this.label_voltage_shunt1.Text = "0.0000";
-            this.label_voltage_shunt1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 16);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Voltage(shunt):";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label_calibration1
+            // label1
             // 
-            this.label_calibration1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_calibration1.AutoSize = true;
-            this.label_calibration1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_calibration1.Location = new System.Drawing.Point(106, 64);
-            this.label_calibration1.Name = "label_calibration1";
-            this.label_calibration1.Size = new System.Drawing.Size(46, 28);
-            this.label_calibration1.TabIndex = 6;
-            this.label_calibration1.Tag = "0";
-            this.label_calibration1.Text = "0.0000";
-            this.label_calibration1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_current1
-            // 
-            this.label_current1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_current1.AutoSize = true;
-            this.label_current1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_current1.Location = new System.Drawing.Point(106, 32);
-            this.label_current1.Name = "label_current1";
-            this.label_current1.Size = new System.Drawing.Size(46, 16);
-            this.label_current1.TabIndex = 5;
-            this.label_current1.Tag = "0";
-            this.label_current1.Text = "0.0000";
-            this.label_current1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 48);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 16);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Power(mW):";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label_power1
-            // 
-            this.label_power1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_power1.AutoSize = true;
-            this.label_power1.Location = new System.Drawing.Point(106, 48);
-            this.label_power1.Name = "label_power1";
-            this.label_power1.Size = new System.Drawing.Size(46, 16);
-            this.label_power1.TabIndex = 9;
-            this.label_power1.Tag = "0";
-            this.label_power1.Text = "0.0000";
-            this.label_power1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 16);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Voltage(bus):";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button_start
             // 
@@ -287,17 +313,6 @@
             this.button_single.UseVisualStyleBackColor = true;
             this.button_single.Click += new System.EventHandler(this.button_single_Click);
             // 
-            // label_address1
-            // 
-            this.label_address1.AutoSize = true;
-            this.label_address1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.label_address1.Location = new System.Drawing.Point(15, 9);
-            this.label_address1.Name = "label_address1";
-            this.label_address1.Size = new System.Drawing.Size(54, 16);
-            this.label_address1.TabIndex = 6;
-            this.label_address1.Tag = "0";
-            this.label_address1.Text = "Adress:";
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
@@ -305,43 +320,46 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.label_voltage_bus2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label_voltage_shunt2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDown_cal2, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label_calibration2, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label_current2, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label15, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label_power2, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDown_cal1, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label_calibration1, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label_address1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label_power1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label_current1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label_voltage_shunt1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label_voltage_bus1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label15, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label_addr1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 1);
             this.tableLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(316, 35);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(257, 92);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(257, 105);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
-            // label_voltage_bus2
+            // label_voltage_bus1
             // 
-            this.label_voltage_bus2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label_voltage_bus1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_voltage_bus2.AutoSize = true;
-            this.label_voltage_bus2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_voltage_bus2.Location = new System.Drawing.Point(106, 0);
-            this.label_voltage_bus2.Name = "label_voltage_bus2";
-            this.label_voltage_bus2.Size = new System.Drawing.Size(46, 16);
-            this.label_voltage_bus2.TabIndex = 0;
-            this.label_voltage_bus2.Tag = "1";
-            this.label_voltage_bus2.Text = "0.0000";
-            this.label_voltage_bus2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label_voltage_bus1.AutoSize = true;
+            this.label_voltage_bus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_voltage_bus1.Location = new System.Drawing.Point(106, 16);
+            this.label_voltage_bus1.Name = "label_voltage_bus1";
+            this.label_voltage_bus1.Size = new System.Drawing.Size(46, 16);
+            this.label_voltage_bus1.TabIndex = 0;
+            this.label_voltage_bus1.Tag = "1";
+            this.label_voltage_bus1.Text = "0.0000";
+            this.label_voltage_bus1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // label8
             // 
@@ -349,9 +367,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(3, 64);
+            this.label8.Location = new System.Drawing.Point(3, 80);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 28);
+            this.label8.Size = new System.Drawing.Size(72, 25);
             this.label8.TabIndex = 7;
             this.label8.Text = "Calibration";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -362,7 +380,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Location = new System.Drawing.Point(3, 16);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 16);
             this.label9.TabIndex = 1;
@@ -375,7 +393,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 16);
+            this.label10.Location = new System.Drawing.Point(3, 32);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(97, 16);
             this.label10.TabIndex = 2;
@@ -388,12 +406,223 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 32);
+            this.label11.Location = new System.Drawing.Point(3, 48);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(81, 16);
             this.label11.TabIndex = 4;
             this.label11.Text = "Current(mA):";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label_voltage_shunt1
+            // 
+            this.label_voltage_shunt1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_voltage_shunt1.AutoSize = true;
+            this.label_voltage_shunt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_voltage_shunt1.Location = new System.Drawing.Point(106, 32);
+            this.label_voltage_shunt1.Name = "label_voltage_shunt1";
+            this.label_voltage_shunt1.Size = new System.Drawing.Size(46, 16);
+            this.label_voltage_shunt1.TabIndex = 3;
+            this.label_voltage_shunt1.Tag = "1";
+            this.label_voltage_shunt1.Text = "0.0000";
+            this.label_voltage_shunt1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // numericUpDown_cal1
+            // 
+            this.numericUpDown_cal1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDown_cal1.Hexadecimal = true;
+            this.numericUpDown_cal1.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown_cal1.Location = new System.Drawing.Point(161, 83);
+            this.numericUpDown_cal1.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numericUpDown_cal1.Name = "numericUpDown_cal1";
+            this.numericUpDown_cal1.Size = new System.Drawing.Size(56, 22);
+            this.numericUpDown_cal1.TabIndex = 4;
+            this.numericUpDown_cal1.Tag = "1";
+            this.numericUpDown_cal1.ValueChanged += new System.EventHandler(this.numericUpDown_cal_ValueChanged);
+            // 
+            // label_calibration1
+            // 
+            this.label_calibration1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_calibration1.AutoSize = true;
+            this.label_calibration1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_calibration1.Location = new System.Drawing.Point(106, 80);
+            this.label_calibration1.Name = "label_calibration1";
+            this.label_calibration1.Size = new System.Drawing.Size(46, 25);
+            this.label_calibration1.TabIndex = 6;
+            this.label_calibration1.Tag = "1";
+            this.label_calibration1.Text = "0.0000";
+            this.label_calibration1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_current1
+            // 
+            this.label_current1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_current1.AutoSize = true;
+            this.label_current1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_current1.Location = new System.Drawing.Point(106, 48);
+            this.label_current1.Name = "label_current1";
+            this.label_current1.Size = new System.Drawing.Size(46, 16);
+            this.label_current1.TabIndex = 5;
+            this.label_current1.Tag = "1";
+            this.label_current1.Text = "0.0000";
+            this.label_current1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 64);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(81, 16);
+            this.label15.TabIndex = 8;
+            this.label15.Text = "Power(mW):";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label_power1
+            // 
+            this.label_power1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_power1.AutoSize = true;
+            this.label_power1.Location = new System.Drawing.Point(106, 64);
+            this.label_power1.Name = "label_power1";
+            this.label_power1.Size = new System.Drawing.Size(46, 16);
+            this.label_power1.TabIndex = 9;
+            this.label_power1.Tag = "1";
+            this.label_power1.Text = "0.0000";
+            this.label_power1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label_address1
+            // 
+            this.label_address1.AutoSize = true;
+            this.label_address1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label_address1.Location = new System.Drawing.Point(3, 0);
+            this.label_address1.Name = "label_address1";
+            this.label_address1.Size = new System.Drawing.Size(51, 16);
+            this.label_address1.TabIndex = 9;
+            this.label_address1.Tag = "1";
+            this.label_address1.Text = "Adress";
+            // 
+            // label_address2
+            // 
+            this.label_address2.AutoSize = true;
+            this.label_address2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label_address2.Location = new System.Drawing.Point(3, 0);
+            this.label_address2.Name = "label_address2";
+            this.label_address2.Size = new System.Drawing.Size(51, 16);
+            this.label_address2.TabIndex = 11;
+            this.label_address2.Tag = "2";
+            this.label_address2.Text = "Adress";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.label_address2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDown_cal2, 2, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label_calibration2, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label_power2, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label_current2, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label_voltage_shunt2, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label_voltage_bus2, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label20, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label16, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label14, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label_addr2, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 1);
+            this.tableLayoutPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(610, 35);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(257, 105);
+            this.tableLayoutPanel2.TabIndex = 10;
+            // 
+            // label_voltage_bus2
+            // 
+            this.label_voltage_bus2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_voltage_bus2.AutoSize = true;
+            this.label_voltage_bus2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_voltage_bus2.Location = new System.Drawing.Point(106, 16);
+            this.label_voltage_bus2.Name = "label_voltage_bus2";
+            this.label_voltage_bus2.Size = new System.Drawing.Size(46, 16);
+            this.label_voltage_bus2.TabIndex = 0;
+            this.label_voltage_bus2.Tag = "2";
+            this.label_voltage_bus2.Text = "0.0000";
+            this.label_voltage_bus2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(3, 80);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(72, 25);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "Calibration";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(3, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(88, 16);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Voltage(bus):";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(3, 32);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(97, 16);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Voltage(shunt):";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(3, 48);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 16);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "Current(mA):";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label_voltage_shunt2
             // 
@@ -401,11 +630,11 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_voltage_shunt2.AutoSize = true;
             this.label_voltage_shunt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_voltage_shunt2.Location = new System.Drawing.Point(106, 16);
+            this.label_voltage_shunt2.Location = new System.Drawing.Point(106, 32);
             this.label_voltage_shunt2.Name = "label_voltage_shunt2";
             this.label_voltage_shunt2.Size = new System.Drawing.Size(46, 16);
             this.label_voltage_shunt2.TabIndex = 3;
-            this.label_voltage_shunt2.Tag = "1";
+            this.label_voltage_shunt2.Tag = "2";
             this.label_voltage_shunt2.Text = "0.0000";
             this.label_voltage_shunt2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -419,7 +648,7 @@
             0,
             0,
             0});
-            this.numericUpDown_cal2.Location = new System.Drawing.Point(158, 67);
+            this.numericUpDown_cal2.Location = new System.Drawing.Point(161, 83);
             this.numericUpDown_cal2.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -428,7 +657,7 @@
             this.numericUpDown_cal2.Name = "numericUpDown_cal2";
             this.numericUpDown_cal2.Size = new System.Drawing.Size(56, 22);
             this.numericUpDown_cal2.TabIndex = 4;
-            this.numericUpDown_cal2.Tag = "1";
+            this.numericUpDown_cal2.Tag = "2";
             this.numericUpDown_cal2.ValueChanged += new System.EventHandler(this.numericUpDown_cal_ValueChanged);
             // 
             // label_calibration2
@@ -437,11 +666,11 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_calibration2.AutoSize = true;
             this.label_calibration2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_calibration2.Location = new System.Drawing.Point(106, 64);
+            this.label_calibration2.Location = new System.Drawing.Point(106, 80);
             this.label_calibration2.Name = "label_calibration2";
-            this.label_calibration2.Size = new System.Drawing.Size(46, 28);
+            this.label_calibration2.Size = new System.Drawing.Size(46, 25);
             this.label_calibration2.TabIndex = 6;
-            this.label_calibration2.Tag = "1";
+            this.label_calibration2.Tag = "2";
             this.label_calibration2.Text = "0.0000";
             this.label_calibration2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -451,273 +680,80 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label_current2.AutoSize = true;
             this.label_current2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_current2.Location = new System.Drawing.Point(106, 32);
+            this.label_current2.Location = new System.Drawing.Point(106, 48);
             this.label_current2.Name = "label_current2";
             this.label_current2.Size = new System.Drawing.Size(46, 16);
             this.label_current2.TabIndex = 5;
-            this.label_current2.Tag = "1";
+            this.label_current2.Tag = "2";
             this.label_current2.Text = "0.0000";
             this.label_current2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 48);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(81, 16);
-            this.label15.TabIndex = 8;
-            this.label15.Text = "Power(mW):";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label_power2
-            // 
-            this.label_power2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_power2.AutoSize = true;
-            this.label_power2.Location = new System.Drawing.Point(106, 48);
-            this.label_power2.Name = "label_power2";
-            this.label_power2.Size = new System.Drawing.Size(46, 16);
-            this.label_power2.TabIndex = 9;
-            this.label_power2.Tag = "1";
-            this.label_power2.Text = "0.0000";
-            this.label_power2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label_address2
-            // 
-            this.label_address2.AutoSize = true;
-            this.label_address2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.label_address2.Location = new System.Drawing.Point(313, 9);
-            this.label_address2.Name = "label_address2";
-            this.label_address2.Size = new System.Drawing.Size(54, 16);
-            this.label_address2.TabIndex = 9;
-            this.label_address2.Tag = "1";
-            this.label_address2.Text = "Adress:";
-            // 
-            // label_address3
-            // 
-            this.label_address3.AutoSize = true;
-            this.label_address3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.label_address3.Location = new System.Drawing.Point(607, 9);
-            this.label_address3.Name = "label_address3";
-            this.label_address3.Size = new System.Drawing.Size(54, 16);
-            this.label_address3.TabIndex = 11;
-            this.label_address3.Tag = "2";
-            this.label_address3.Text = "Adress:";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.label_voltage_bus3, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label14, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label16, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label_voltage_shunt3, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDown_cal3, 2, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label_calibration3, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label_current3, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label20, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label_power3, 1, 3);
-            this.tableLayoutPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(610, 35);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 5;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(257, 92);
-            this.tableLayoutPanel2.TabIndex = 10;
-            // 
-            // label_voltage_bus3
-            // 
-            this.label_voltage_bus3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_voltage_bus3.AutoSize = true;
-            this.label_voltage_bus3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_voltage_bus3.Location = new System.Drawing.Point(106, 0);
-            this.label_voltage_bus3.Name = "label_voltage_bus3";
-            this.label_voltage_bus3.Size = new System.Drawing.Size(46, 16);
-            this.label_voltage_bus3.TabIndex = 0;
-            this.label_voltage_bus3.Tag = "2";
-            this.label_voltage_bus3.Text = "0.0000";
-            this.label_voltage_bus3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(3, 64);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(72, 28);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "Calibration";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(3, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(88, 16);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Voltage(bus):";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 16);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(97, 16);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Voltage(shunt):";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(3, 32);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(81, 16);
-            this.label16.TabIndex = 4;
-            this.label16.Text = "Current(mA):";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label_voltage_shunt3
-            // 
-            this.label_voltage_shunt3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_voltage_shunt3.AutoSize = true;
-            this.label_voltage_shunt3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_voltage_shunt3.Location = new System.Drawing.Point(106, 16);
-            this.label_voltage_shunt3.Name = "label_voltage_shunt3";
-            this.label_voltage_shunt3.Size = new System.Drawing.Size(46, 16);
-            this.label_voltage_shunt3.TabIndex = 3;
-            this.label_voltage_shunt3.Tag = "2";
-            this.label_voltage_shunt3.Text = "0.0000";
-            this.label_voltage_shunt3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // numericUpDown_cal3
-            // 
-            this.numericUpDown_cal3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown_cal3.Hexadecimal = true;
-            this.numericUpDown_cal3.Increment = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numericUpDown_cal3.Location = new System.Drawing.Point(158, 67);
-            this.numericUpDown_cal3.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.numericUpDown_cal3.Name = "numericUpDown_cal3";
-            this.numericUpDown_cal3.Size = new System.Drawing.Size(56, 22);
-            this.numericUpDown_cal3.TabIndex = 4;
-            this.numericUpDown_cal3.Tag = "2";
-            this.numericUpDown_cal3.ValueChanged += new System.EventHandler(this.numericUpDown_cal_ValueChanged);
-            // 
-            // label_calibration3
-            // 
-            this.label_calibration3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_calibration3.AutoSize = true;
-            this.label_calibration3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_calibration3.Location = new System.Drawing.Point(106, 64);
-            this.label_calibration3.Name = "label_calibration3";
-            this.label_calibration3.Size = new System.Drawing.Size(46, 28);
-            this.label_calibration3.TabIndex = 6;
-            this.label_calibration3.Tag = "2";
-            this.label_calibration3.Text = "0.0000";
-            this.label_calibration3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label20
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(3, 48);
+            this.label20.Location = new System.Drawing.Point(3, 64);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(81, 16);
             this.label20.TabIndex = 8;
             this.label20.Text = "Power(mW):";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label_power3
+            // label_power2
             // 
-            this.label_power3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label_power2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_power3.AutoSize = true;
-            this.label_power3.Location = new System.Drawing.Point(106, 48);
-            this.label_power3.Name = "label_power3";
-            this.label_power3.Size = new System.Drawing.Size(46, 16);
-            this.label_power3.TabIndex = 9;
-            this.label_power3.Tag = "2";
-            this.label_power3.Text = "0.0000";
-            this.label_power3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label_power2.AutoSize = true;
+            this.label_power2.Location = new System.Drawing.Point(106, 64);
+            this.label_power2.Name = "label_power2";
+            this.label_power2.Size = new System.Drawing.Size(46, 16);
+            this.label_power2.TabIndex = 9;
+            this.label_power2.Tag = "2";
+            this.label_power2.Text = "0.0000";
+            this.label_power2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // label_current3
+            // label_addr1
             // 
-            this.label_current3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_current3.AutoSize = true;
-            this.label_current3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_current3.Location = new System.Drawing.Point(106, 32);
-            this.label_current3.Name = "label_current3";
-            this.label_current3.Size = new System.Drawing.Size(46, 16);
-            this.label_current3.TabIndex = 5;
-            this.label_current3.Tag = "2";
-            this.label_current3.Text = "0.0000";
-            this.label_current3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label_addr1.AutoSize = true;
+            this.label_addr1.Location = new System.Drawing.Point(106, 0);
+            this.label_addr1.Name = "label_addr1";
+            this.label_addr1.Size = new System.Drawing.Size(49, 16);
+            this.label_addr1.TabIndex = 10;
+            this.label_addr1.Text = "0x0001";
+            // 
+            // label_addr2
+            // 
+            this.label_addr2.AutoSize = true;
+            this.label_addr2.Location = new System.Drawing.Point(106, 0);
+            this.label_addr2.Name = "label_addr2";
+            this.label_addr2.Size = new System.Drawing.Size(49, 16);
+            this.label_addr2.TabIndex = 10;
+            this.label_addr2.Text = "0x0002";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 224);
-            this.Controls.Add(this.label_address3);
+            this.ClientSize = new System.Drawing.Size(894, 227);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.label_address2);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.label_address1);
             this.Controls.Add(this.button_single);
             this.Controls.Add(this.button_start);
-            this.Controls.Add(this.tableLayoutPanel);
+            this.Controls.Add(this.tableLayoutPanel0);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
             this.Text = "CINA219 Test";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal1)).EndInit();
-            this.tableLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal0)).EndInit();
+            this.tableLayoutPanel0.ResumeLayout(false);
+            this.tableLayoutPanel0.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal1)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -725,47 +761,50 @@
 
         #endregion
 
-        private System.Windows.Forms.NumericUpDown numericUpDown_cal1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.Label label_voltage_bus1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_cal0;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel0;
+        private System.Windows.Forms.Label label_voltage_bus0;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label_voltage_shunt1;
+        private System.Windows.Forms.Label label_voltage_shunt0;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label_current1;
-        private System.Windows.Forms.Label label_calibration1;
+        private System.Windows.Forms.Label label_current0;
+        private System.Windows.Forms.Label label_calibration0;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label_power1;
+        private System.Windows.Forms.Label label_power0;
         private System.Windows.Forms.Button button_start;
         private System.Windows.Forms.Button button_single;
-        private System.Windows.Forms.Label label_address1;
+        private System.Windows.Forms.Label label_address0;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label_voltage_bus2;
+        private System.Windows.Forms.Label label_voltage_bus1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label_voltage_shunt2;
-        private System.Windows.Forms.NumericUpDown numericUpDown_cal2;
-        private System.Windows.Forms.Label label_calibration2;
-        private System.Windows.Forms.Label label_current2;
+        private System.Windows.Forms.Label label_voltage_shunt1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_cal1;
+        private System.Windows.Forms.Label label_calibration1;
+        private System.Windows.Forms.Label label_current1;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label_power2;
+        private System.Windows.Forms.Label label_power1;
+        private System.Windows.Forms.Label label_address1;
         private System.Windows.Forms.Label label_address2;
-        private System.Windows.Forms.Label label_address3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label_voltage_bus3;
+        private System.Windows.Forms.Label label_voltage_bus2;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label_voltage_shunt3;
-        private System.Windows.Forms.NumericUpDown numericUpDown_cal3;
-        private System.Windows.Forms.Label label_calibration3;
-        private System.Windows.Forms.Label label_current3;
+        private System.Windows.Forms.Label label_voltage_shunt2;
+        private System.Windows.Forms.NumericUpDown numericUpDown_cal2;
+        private System.Windows.Forms.Label label_calibration2;
+        private System.Windows.Forms.Label label_current2;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label_power3;
+        private System.Windows.Forms.Label label_power2;
+        private System.Windows.Forms.Label label_addr0;
+        private System.Windows.Forms.Label label_addr1;
+        private System.Windows.Forms.Label label_addr2;
     }
 }
 
