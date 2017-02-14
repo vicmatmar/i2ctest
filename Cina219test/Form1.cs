@@ -163,24 +163,28 @@ namespace Cina219test
                 float current = _sensors[i].GetCurrent();
                 text = string.Format("{0,5:F2}", current);
                 if (ovf)
-                    text += "*";
-                ctrlname = string.Format("label_current{0}", i);
-                syncLabelSetTextAndColor(ctrlname, text, Color.Black);
-                //TODO fix this only reports one LED
-                if (current > 20.0)
+                    text += " ovf";
+
+                if (current > 10.0)
                 {
                     // Trun LED ON, C0 low
                     byte led_bit = _sensors[i].GetACBusPins();
-                    led_bit = (byte)(led_bit & 0xFE);
+                    byte mask = (byte)~(0x01 << i);
+                    led_bit = (byte)(led_bit & mask);
                     _sensors[i].SetACBusPins(led_bit, 0xFF);
+                    text += "*";
                 }
                 else
                 {
                     // Trun LED OFF, C0 high
                     byte led_bit = _sensors[i].GetACBusPins();
-                    led_bit = (byte)(led_bit | 0x01);
+                    byte mask = (byte)(0x01 << i);
+                    led_bit = (byte)(led_bit | mask);
                     _sensors[i].SetACBusPins(led_bit, 0xFF);
                 }
+
+                ctrlname = string.Format("label_current{0}", i);
+                syncLabelSetTextAndColor(ctrlname, text, Color.Black);
 
                 float power = _sensors[i].GetPower();
                 text = string.Format("{0,5:F2}", power);
