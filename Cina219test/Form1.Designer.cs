@@ -76,6 +76,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label_addr2 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label_err = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cal0)).BeginInit();
             this.tableLayoutPanel0.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -731,11 +732,21 @@
             this.label13.Text = "Voltage(bus):";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label_err
+            // 
+            this.label_err.AutoSize = true;
+            this.label_err.Location = new System.Drawing.Point(13, 214);
+            this.label_err.Name = "label_err";
+            this.label_err.Size = new System.Drawing.Size(47, 13);
+            this.label_err.TabIndex = 11;
+            this.label_err.Text = "label_err";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(894, 227);
+            this.Controls.Add(this.label_err);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.button_single);
@@ -805,6 +816,7 @@
         private System.Windows.Forms.Label label_addr0;
         private System.Windows.Forms.Label label_addr1;
         private System.Windows.Forms.Label label_addr2;
+        private System.Windows.Forms.Label label_err;
     }
 }
 

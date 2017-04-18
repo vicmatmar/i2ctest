@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cina219test", "Cina219test\Cina219test.csproj", "{AE640B30-D127-4380-8C7F-5071F7BD6755}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Centralite.CurrentSensor", "..\..\..\GitHub\HomeAutomationTester\Centralite.CurrentSensor\Centralite.CurrentSensor.csproj", "{AFFBFB9E-8CB7-4EAD-804D-E863F306926B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Centralite.CurrentSensor", "internal-common\Centralite.CurrentSensor\Centralite.CurrentSensor.csproj", "{AFFBFB9E-8CB7-4EAD-804D-E863F306926B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

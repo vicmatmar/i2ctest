@@ -30,6 +30,8 @@ namespace Cina219test
         public Form1()
         {
             InitializeComponent();
+
+            label_err.Text = "";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -128,7 +130,15 @@ namespace Cina219test
                 if (cancel.IsCancellationRequested)
                     break;
 
-                read_data();
+                try
+                {
+                    read_data();
+                    syncLabelSetTextAndColor(label_err, "", Color.Black);
+                }
+                catch(Exception ex)
+                {
+                    syncLabelSetTextAndColor(label_err, ex.Message, Color.Black);
+                }
             }
         }
 
