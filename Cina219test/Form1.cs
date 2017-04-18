@@ -79,6 +79,7 @@ namespace Cina219test
             _sensors = new Cina219[_total_sensors];
 
             _sensors[0] = new Cina219(_sensor_addresses[0], _i2c_controller_index);
+            _sensors[0].UnitCurrent = Cina219.CurrentUnit.mA;
             _sensors[0].Init();
 
             _sensor_calvals = new UInt16[_total_sensors];
@@ -88,6 +89,7 @@ namespace Cina219test
             for(int i = 1; i < _total_sensors; i++)
             {
                 _sensors[i] = new Cina219(_sensors[0].I2CController, _sensor_addresses[i]);
+                _sensors[i].UnitCurrent = Cina219.CurrentUnit.mA;
                 _sensors[i].Init();
 
                 _sensor_calvals[i] = _sensors[i].ReadCalibration();
