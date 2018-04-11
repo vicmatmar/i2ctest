@@ -16,7 +16,7 @@ namespace CINA219
     ///  http://www.ftdichip.com/Support/Documents/AppNotes/AN_113_FTDI_Hi_Speed_USB_To_I2C_Example.pdf
     /// </summary>
 
-    class FTI2C : IDisposable
+    public class FTI2C : IDisposable
     {
         const byte MSB_FALLING_EDGE_CLOCK_BYTE_IN = 0x20;
         const byte MSB_FALLING_EDGE_CLOCK_BYTE_OUT = 0x11;
@@ -141,7 +141,8 @@ namespace CINA219
             // Read Byte
             buffer.Add(0x20);
             buffer.Add(0x00);
-            buffer.Add(0x00);
+            buffer.Add(0x00);
+
             // Send ACK
             buffer.Add(SET_DATA_BITS_ADBUS);
             buffer.Add(0x00);
@@ -159,7 +160,8 @@ namespace CINA219
             // Read 8 bits
             buffer.Add(0x20);
             buffer.Add(0x00);
-            buffer.Add(0x00);
+            buffer.Add(0x00);
+
             buffer.Add(0x12);
             buffer.Add(0x00);
             buffer.Add(0x00);
@@ -283,7 +285,8 @@ namespace CINA219
             // Clock for ACK
             buffer.Add(MSB_RISING_EDGE_CLOCK_BIT_IN);// Command to clock in bits MSB first on rising edge
             buffer.Add(0x00);// length of 0x00 means scan 1 bit
-            buffer.Add(0x87);//Send answer back immediate command. This will make the chip flush its buffer back to the PC
+            buffer.Add(0x87);//Send answer back immediate command. This will make the chip flush its buffer back to the PC
+
             // SDA High, SCL low
             buffer.AddRange(form_SetDataBits(BUS.ADBUS, 0x02, 0x03));
 
@@ -396,7 +399,9 @@ namespace CINA219
         }
 
         /// <summary>
-        /// This will setup the direction of the BUS and force a value on the bits that are set as output.         /// A 1 in the Direction byte will make that bit an output, 0 an input        /// </summary>
+        /// This will setup the direction of the BUS and force a value on the bits that are set as output. 
+        /// A 1 in the Direction byte will make that bit an output, 0 an input
+        /// </summary>
         /// <param name="bus"></param>
         /// <param name="value"></param>
         /// <param name="direction"></param>

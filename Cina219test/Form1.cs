@@ -20,7 +20,7 @@ namespace Cina219test
 
         Cina219[] _sensors;
         byte[] _sensor_addresses = new byte[] { 0x40, 0x41, 0x44, 0x45 };
-        int _total_sensors = 3;
+        int _total_sensors = 1;
 
         Task _read_task;
         CancellationTokenSource _cancel_read_task;
@@ -36,20 +36,12 @@ namespace Cina219test
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Make sure we have a i2c controller attached
-            _i2c_controller_index = Cina219.GetFirstDevIndex();
-            if (_i2c_controller_index < 0)
-                throw new Exception("FT232H not found");
-
-            // Init controller
-            initCina219();
-
             button_single.Enabled = false;
-            button_start.Text = "Stop";
+            button_start.Text = "Start";
 
             // Disable all panels
             int n = 0;
-            while(true)
+            while (true)
             {
                 string ctrlname = string.Format("tableLayoutPanel{0}", n++);
                 Control[] controls = Controls.Find(ctrlname, true);
@@ -63,7 +55,7 @@ namespace Cina219test
             {
                 string ctrlname = string.Format("label_addr{0}", i);
                 Label control = (Label)Controls.Find(ctrlname, true)[0];
-                control.Text = string.Format("0x{0:X}", _sensors[i].INA219_ADDRESS);
+                //control.Text = string.Format("0x{0:X}", _sensors[i].INA219_ADDRESS);
 
                 // Enable panel
                 ctrlname = string.Format("tableLayoutPanel{0}", i);
@@ -71,39 +63,58 @@ namespace Cina219test
                 controls[0].Enabled = true;
             }
 
-            start_read_task();
         }
 
-        void initCina219()
+        void initCina219(int sensor_count)
         {
-            _sensors = new Cina219[_total_sensors];
-
-            _sensors[0] = new Cina219(_sensor_addresses[0], _i2c_controller_index);
-            _sensors[0].UnitCurrent = Cina219.CurrentUnit.mA;
-            _sensors[0].Init();
-
-            _sensor_calvals = new UInt16[_total_sensors];
-            _sensor_calvals[0] = _sensors[0].ReadCalibration();
-            numericUpDown_cal0.Value = _sensor_calvals[0];
-
-            for(int i = 1; i < _total_sensors; i++)
+            try
             {
-                _sensors[i] = new Cina219(_sensors[0].I2CController, _sensor_addresses[i]);
-                _sensors[i].UnitCurrent = Cina219.CurrentUnit.mA;
-                _sensors[i].Init();
+                int controller_index = Cina219.GetFirstDevIndex();
+                if (_i2c_controller_index < 0)
+                    throw new Exception("FT232H not found");
 
-                _sensor_calvals[i] = _sensors[i].ReadCalibration();
+                _total_sensors = sensor_count;
+                _sensors = new Cina219[_total_sensors];
 
-                string ctrlname = string.Format("numericUpDown_cal{0}", i);
-                NumericUpDown control = (NumericUpDown)Controls.Find(ctrlname, true)[0];
-                control.Value = _sensor_calvals[i];
+                _sensors[0] = new Cina219(_sensor_addresses[0], controller_index);
+                _sensors[0].UnitCurrent = Cina219.CurrentUnit.mA;
+                _sensors[0].Init();
 
+                _sensor_calvals = new UInt16[_total_sensors];
+                _sensor_calvals[0] = _sensors[0].ReadCalibration();
+                numericUpDown_cal0.Value = _sensor_calvals[0];
+
+                for (int i = 1; i < _total_sensors; i++)
+                {
+                    _sensors[i] = new Cina219(_sensors[0].I2CController, _sensor_addresses[i]);
+                    _sensors[i].UnitCurrent = Cina219.CurrentUnit.mA;
+                    _sensors[i].Init();
+
+                    _sensor_calvals[i] = _sensors[i].ReadCalibration();
+
+                    string ctrlname = string.Format("numericUpDown_cal{0}", i);
+                    NumericUpDown control = (NumericUpDown)Controls.Find(ctrlname, true)[0];
+                    control.Value = _sensor_calvals[i];
+
+                }
+            }
+            catch (Exception ex)
+            {
+                label_err.Text = ex.Message;
+                return;
             }
 
         }
 
+        void disposeCina219()
+        {
+            foreach (var sensor in _sensors)
+                sensor.Dispose();
+        }
         void start_read_task()
         {
+            initCina219(Properties.Settings.Default.Sensor_Count);
+
             _cancel_read_task = new CancellationTokenSource();
             _read_task = new Task(() => read_data_continous(_cancel_read_task.Token), _cancel_read_task.Token);
             _read_task.ContinueWith(ct => read_data_done(_read_task), TaskContinuationOptions.OnlyOnRanToCompletion);
@@ -130,15 +141,20 @@ namespace Cina219test
             while (true)
             {
                 if (cancel.IsCancellationRequested)
+                {
+
+                    disposeCina219();
                     break;
+                }
 
                 try
                 {
                     read_data();
                     syncLabelSetTextAndColor(label_err, "", Color.Black);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
+                    disposeCina219();
                     syncLabelSetTextAndColor(label_err, ex.Message, Color.Black);
                 }
             }
@@ -146,7 +162,7 @@ namespace Cina219test
 
         void read_data()
         {
-            for(int i=0; i < _sensors.Length; i++)
+            for (int i = 0; i < _sensors.Length; i++)
             {
                 UInt16 cal_val = _sensors[i].ReadCalibration();
                 string text = string.Format("0x{0:X}", cal_val);
@@ -258,7 +274,7 @@ namespace Cina219test
 
         private void button_start_Click(object sender, EventArgs e)
         {
-            if (_read_task.Status == TaskStatus.Running)
+            if (_read_task != null && _read_task.Status == TaskStatus.Running)
             {
                 stop_read_task();
             }
@@ -273,7 +289,11 @@ namespace Cina219test
 
         private void button_single_Click(object sender, EventArgs e)
         {
+            initCina219(Properties.Settings.Default.Sensor_Count);
+
             read_data();
+
+            disposeCina219();
         }
 
     }
